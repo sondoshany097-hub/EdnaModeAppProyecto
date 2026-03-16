@@ -6,6 +6,6 @@ package Model;
 /**
  * 
  */
-public class tallere {
+public class taller {
 
 }
