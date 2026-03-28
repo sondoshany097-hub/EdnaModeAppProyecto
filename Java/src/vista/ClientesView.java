@@ -76,21 +76,15 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnFiltrar);
 
         // ===== Tabla de clientes =====
-        String[] columns = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
-        tableModel = new DefaultTableModel(columns, 0); // Inicialmente sin filas
+        String[] columnas = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
+        tableModel = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
         tableClientes = new JTable(tableModel);
         tableClientes.setRowHeight(28);
         tableClientes.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        tableClientes.setSelectionBackground(new Color(220, 230, 210));
-        tableClientes.setSelectionForeground(Color.BLACK);
-        tableClientes.setGridColor(new Color(220, 220, 220));
-        tableClientes.setShowGrid(true);
+        tableClientes.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        JTableHeader header = tableClientes.getTableHeader();
-        header.setFont(new Font("SansSerif", Font.BOLD, 14));
-        header.setBackground(darkGreen);
-        header.setForeground(Color.WHITE);
-        header.setOpaque(true);
+
+
 
         JScrollPane scrollPane = new JScrollPane(tableClientes);
         scrollPane.setBounds(30, 141, 820, 279);
