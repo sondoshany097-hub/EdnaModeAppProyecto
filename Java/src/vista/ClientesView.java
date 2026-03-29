@@ -107,8 +107,9 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnBorrar);
 
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setForeground(new Color(255, 255, 255));
         btnVolver.setBounds(600, 470, 130, 40);
-        styleButton(btnVolver, lightGray, textColor);
+        styleButton(btnVolver, darkGreen, textColor);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
         getContentPane().add(btnVolver);
 

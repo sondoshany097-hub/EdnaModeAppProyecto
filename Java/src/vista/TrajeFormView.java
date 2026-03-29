@@ -80,11 +80,11 @@ public class TrajeFormView extends JFrame {
         getContentPane().add(lblNombreTraje);
 
         cbNombreTraje = new JComboBox<>(new String[]{
-                "Traje principal",
-                "Traje de combate",
-                "Traje secundario",
-                "Traje de gala"
-        });
+              "Traje principal",
+              "Traje de combate",
+              "Traje secundario",
+              "Traje de gala"
+       });
         cbNombreTraje.setBounds(220, 200, 250, 32);
         getContentPane().add(cbNombreTraje);
 
@@ -116,8 +116,8 @@ public class TrajeFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(320, 330, 130, 42);
         btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnCancelar.setForeground(textColor);
-        btnCancelar.setBackground(lightGray);
+        btnCancelar.setForeground(new Color(255, 255, 255));
+        btnCancelar.setBackground(darkGreen);
         btnCancelar.setFocusPainted(false);
         getContentPane().add(btnCancelar);
 

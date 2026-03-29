@@ -99,7 +99,7 @@ public class CitasView extends JFrame {
         btnVolver = new JButton("Volver");
         btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnVolver.setForeground(textColor);
-        btnVolver.setBackground(lightGray);
+        btnVolver.setBackground(darkGreen);
         btnVolver.setFocusPainted(false);
         btnVolver.setBounds(690, 450, 150, 42);
         getContentPane().add(btnVolver);

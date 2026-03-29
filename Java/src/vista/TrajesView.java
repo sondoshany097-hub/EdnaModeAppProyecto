@@ -89,8 +89,8 @@ public class TrajesView extends JFrame {
         JButton btnVolver = new JButton("Volver");
         btnVolver.setBounds(610, 420, 130, 40);
         btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnVolver.setForeground(textColor);
-        btnVolver.setBackground(lightGray);
+        btnVolver.setForeground(new Color(255, 255, 255));
+        btnVolver.setBackground(darkGreen);
         btnVolver.setFocusPainted(false);
         btnVolver.setBorderPainted(false); // Mantener estilo uniforme
         getContentPane().add(btnVolver);

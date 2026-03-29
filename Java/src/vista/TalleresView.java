@@ -73,8 +73,9 @@ public class TalleresView extends JFrame {
         getContentPane().add(btnBorrar);
 
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setForeground(new Color(255, 255, 255));
         btnVolver.setBounds(610, 410, 130, 40);
-        styleButton(btnVolver, lightGray, textColor);
+        styleButton(btnVolver, darkGreen, textColor);
         getContentPane().add(btnVolver);
 
         // ===== Acciones de botones =====

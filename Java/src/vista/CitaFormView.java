@@ -51,7 +51,7 @@ public class CitaFormView extends JFrame {
         lblCliente.setBounds(60, 80, 120, 25);
         getContentPane().add(lblCliente);
 
-        cbCliente = new JComboBox<>(new String[]{"Mr. Incredible", "Elastigirl", "Frozone", "Syndrome"});
+       cbCliente = new JComboBox<>(new String[]{"Mr. Incredible", "Elastigirl", "Frozone", "Syndrome"});
         cbCliente.setBounds(200, 80, 280, 30);
         getContentPane().add(cbCliente);
 
@@ -109,7 +109,7 @@ public class CitaFormView extends JFrame {
         getContentPane().add(btnGuardar);
 
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBackground(lightGray);
+        btnCancelar.setBackground(darkGreen);
         btnCancelar.setBounds(320, 390, 130, 40);
         getContentPane().add(btnCancelar);
 

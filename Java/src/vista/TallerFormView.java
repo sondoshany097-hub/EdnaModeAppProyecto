@@ -97,8 +97,8 @@ public class TallerFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(300, 310, 130, 40);
         btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnCancelar.setForeground(textColor);
-        btnCancelar.setBackground(lightGray);
+        btnCancelar.setForeground(new Color(255, 255, 255));
+        btnCancelar.setBackground(darkGreen);
         btnCancelar.setFocusPainted(false);
         getContentPane().add(btnCancelar);
 
