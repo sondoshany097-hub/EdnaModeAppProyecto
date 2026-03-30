@@ -95,13 +95,13 @@ public class CitasView extends JFrame {
         btnBorrar.setBounds(510, 450, 150, 42);
         getContentPane().add(btnBorrar);
 
-        // Botón volver
-        btnVolver = new JButton("Volver");
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(683, 451, 144, 40);
         btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnVolver.setForeground(textColor);
+        btnVolver.setForeground(new Color(255, 255, 255));
         btnVolver.setBackground(darkGreen);
         btnVolver.setFocusPainted(false);
-        btnVolver.setBounds(690, 450, 150, 42);
+        btnVolver.setBorderPainted(false); // Mantener estilo uniforme
         getContentPane().add(btnVolver);
 
         // ===== Acciones de botones =====

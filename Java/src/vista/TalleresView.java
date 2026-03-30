@@ -59,23 +59,38 @@ public class TalleresView extends JFrame {
         // ===== Botones de acciones =====
         JButton btnNuevo = new JButton("Nuevo");
         btnNuevo.setBounds(130, 410, 130, 40);
-        styleButton(btnNuevo, darkGreen, Color.WHITE);
+        btnNuevo.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnNuevo.setForeground(new Color(255, 255, 255));
+        btnNuevo.setBackground(darkGreen);
+        btnNuevo.setFocusPainted(false);
+        btnNuevo.setBorderPainted(false);
         getContentPane().add(btnNuevo);
 
         JButton btnEditar = new JButton("Editar");
         btnEditar.setBounds(290, 410, 130, 40);
-        styleButton(btnEditar, gold, Color.WHITE);
+        btnEditar.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnEditar.setForeground(new Color(255, 255, 255));
+        btnEditar.setBackground(gold);
+        btnEditar.setFocusPainted(false);
+        btnEditar.setBorderPainted(false);
         getContentPane().add(btnEditar);
 
         JButton btnBorrar = new JButton("Borrar");
         btnBorrar.setBounds(450, 410, 130, 40);
-        styleButton(btnBorrar, new Color(140, 40, 40), Color.WHITE);
+        btnBorrar.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnBorrar.setForeground(new Color(255, 255, 255));
+        btnBorrar.setBackground(new Color(140, 40, 40)); // rojo oscuro
+        btnBorrar.setFocusPainted(false);
+        btnBorrar.setBorderPainted(false);
         getContentPane().add(btnBorrar);
 
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(612, 410, 130, 40);
+        btnVolver.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnVolver.setForeground(new Color(255, 255, 255));
-        btnVolver.setBounds(610, 410, 130, 40);
-        styleButton(btnVolver, darkGreen, textColor);
+        btnVolver.setBackground(darkGreen);
+        btnVolver.setFocusPainted(false);
+        btnVolver.setBorderPainted(false); // Mantener estilo uniforme
         getContentPane().add(btnVolver);
 
         // ===== Acciones de botones =====

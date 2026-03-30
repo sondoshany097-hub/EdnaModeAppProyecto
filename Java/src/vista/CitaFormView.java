@@ -102,15 +102,23 @@ public class CitaFormView extends JFrame {
 
         // ===== Botones =====
 
+     // Botón Guardar
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBackground(darkGreen);
+        btnGuardar.setBounds(150, 390, 130, 42);
+        btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnGuardar.setForeground(Color.WHITE);
-        btnGuardar.setBounds(140, 390, 130, 40);
+        btnGuardar.setBackground(darkGreen);
+        btnGuardar.setFocusPainted(false);
+        btnGuardar.setBorderPainted(false);
         getContentPane().add(btnGuardar);
 
+        // Botón Cancelar
         JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(320, 390, 130, 42);
+        btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnCancelar.setForeground(new Color(255, 255, 255));
         btnCancelar.setBackground(darkGreen);
-        btnCancelar.setBounds(320, 390, 130, 40);
+        btnCancelar.setFocusPainted(false);
         getContentPane().add(btnCancelar);
 
         // ===== Acciones de botones =====
