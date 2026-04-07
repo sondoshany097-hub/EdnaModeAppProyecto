@@ -9,7 +9,9 @@ import java.awt.*;
 
 public class CitasView extends JFrame {
 
-    // Componentes principales
+    /**
+     * Componentes principales
+     */
     private JTable tableCitas;             // Tabla donde se muestran las citas
     private DefaultTableModel tableModel;  // Modelo de datos de la tabla
     private JButton btnNueva;              // Botón para crear nueva cita
@@ -17,7 +19,9 @@ public class CitasView extends JFrame {
     private JButton btnBorrar;             // Botón para eliminar cita
     private JButton btnVolver;             // Botón para volver al menú principal
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public CitasView() {
         setTitle("Edna Moda - Citas");         // Título de la ventana
         setSize(950, 600);                    // Tamaño de la ventana
@@ -29,43 +33,59 @@ public class CitasView extends JFrame {
         inicializarComponentes();             // Crear componentes
     }
 
-    // Configuración del panel principal
+    /**
+     * Configuración del panel principal
+     */
     private void inicializarVentana() {
         getContentPane().setLayout(null);     // Layout absoluto
         getContentPane().setBackground(Color.WHITE); // Fondo blanco
     }
 
-    // Creación de todos los componentes visuales
+    /**
+     * Creación de todos los componentes visuales
+     */
     private void inicializarComponentes() {
-        // Colores personalizados
+        /**
+         * Colores personalizados
+         */
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
         Color textColor = new Color(40, 40, 40);
         Color lightGray = new Color(245, 245, 245);
 
-        // ===== Título =====
+        /**
+         * ===== Título =====
+         */
         JLabel lblTitle = new JLabel("Gestión de Citas");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
         lblTitle.setBounds(30, 20, 300, 40);
         getContentPane().add(lblTitle);
 
-        // ===== Tabla de citas =====
-        String[] columnas = {"ID", "Cliente", "Traje", "Taller", "Fecha", "Hora", "Duración"};
+        /**
+         * ===== Tabla de citas =====
+         */
+        String[] columnas = {"Nombre de Cliente", "Nombre de Traje", "Nombre de Taller", "Fecha", "Hora", "Duración"};
         tableModel = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
         tableCitas = new JTable(tableModel);
         tableCitas.setRowHeight(28);
         tableCitas.setFont(new Font("SansSerif", Font.PLAIN, 14));
         tableCitas.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        // Scroll para la tabla
+        /**
+         * Scroll para la tabla
+         */
         JScrollPane scrollPane = new JScrollPane(tableCitas);
         scrollPane.setBounds(30, 80, 880, 330);
         getContentPane().add(scrollPane);
 
-        // ===== Botones =====
+        /**
+         * ===== Botones =====
+         */
 
-        // Botón nueva cita
+        /**
+         * Botón nueva cita
+         */
         btnNueva = new JButton("Nueva cita");
         btnNueva.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnNueva.setForeground(Color.WHITE);
@@ -75,7 +95,9 @@ public class CitasView extends JFrame {
         btnNueva.setBounds(150, 450, 150, 42);
         getContentPane().add(btnNueva);
 
-        // Botón editar
+        /**
+         * Botón editar
+         */
         btnEditar = new JButton("Editar");
         btnEditar.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnEditar.setForeground(Color.WHITE);
@@ -85,7 +107,9 @@ public class CitasView extends JFrame {
         btnEditar.setBounds(330, 450, 150, 42);
         getContentPane().add(btnEditar);
 
-        // Botón borrar
+        /**
+         * Botón borrar
+         */
         btnBorrar = new JButton("Borrar");
         btnBorrar.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnBorrar.setForeground(Color.WHITE);
@@ -104,15 +128,21 @@ public class CitasView extends JFrame {
         btnVolver.setBorderPainted(false); // Mantener estilo uniforme
         getContentPane().add(btnVolver);
 
-        // ===== Acciones de botones =====
+        /**
+         *  ===== Acciones de botones =====
+         */
 
-        // Abrir formulario para nueva cita
+        /**
+         *  Abrir formulario para nueva cita
+         */
         btnNueva.addActionListener(e -> {
             new CitaFormView().setVisible(true);
             dispose(); // Cierra esta ventana
         });
 
-        // Editar cita seleccionada
+        /**Editar cita seleccionada
+         * 
+         */
         btnEditar.addActionListener(e -> {
             int fila = tableCitas.getSelectedRow();
 
@@ -125,7 +155,9 @@ public class CitasView extends JFrame {
             }
         });
 
-        // Borrar cita seleccionada
+        /**
+         * Borrar cita seleccionada
+         */
         btnBorrar.addActionListener(e -> {
             int fila = tableCitas.getSelectedRow();
 
@@ -147,7 +179,9 @@ public class CitasView extends JFrame {
             }
         });
 
-        // Volver al menú principal
+        /**
+         * Volver al menú principal
+         */
         btnVolver.addActionListener(e -> {
             new MainView().setVisible(true);
             dispose();

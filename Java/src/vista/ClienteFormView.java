@@ -3,6 +3,9 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 
+ */
 public class ClienteFormView extends JFrame {
 
     // Campos de texto para ingresar información del cliente
@@ -25,6 +28,9 @@ public class ClienteFormView extends JFrame {
     }
 
     // Configuración básica de la ventana
+    /**
+     * 
+     */
     private void initWindow() {
         getContentPane().setLayout(null);      // Layout absoluto
         getContentPane().setBackground(Color.WHITE); // Fondo blanco
@@ -47,15 +53,15 @@ public class ClienteFormView extends JFrame {
         // ===== Campos de formulario =====
 
         // ID del cliente
-        JLabel lblId = new JLabel("ID del cliente:");
-        lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblId.setForeground(textColor);
-        lblId.setBounds(70, 100, 140, 25);
-        getContentPane().add(lblId);
+        //JLabel lblId = new JLabel("ID del cliente:");
+        //lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
+        //lblId.setForeground(textColor);
+        //lblId.setBounds(70, 100, 140, 25);
+        //getContentPane().add(lblId);
 
-        txtId = new JTextField();
-        txtId.setBounds(220, 100, 250, 32);
-        getContentPane().add(txtId);
+        //txtId = new JTextField();
+        //txtId.setBounds(220, 100, 250, 32);
+        //getContentPane().add(txtId);
 
         // Nombre del cliente
         JLabel lblNombre = new JLabel("Nombre:");

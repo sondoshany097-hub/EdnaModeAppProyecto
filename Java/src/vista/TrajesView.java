@@ -11,42 +11,50 @@ public class TrajesView extends JFrame {
     private DefaultTableModel tableModel;
 
     public TrajesView() {
-        setTitle("Edna Moda - Trajes"); // Título de la ventana
-        setSize(900, 560); // Tamaño de la ventana
-        setLocationRelativeTo(null); // Centrar la ventana en pantalla
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra la app al cerrar la ventana
-        setResizable(false); // Evita que el usuario cambie el tamaño
+        setTitle("Edna Moda - Trajes"); 
+        setSize(900, 560); 
+        setLocationRelativeTo(null); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setResizable(false); 
 
-        initWindow(); // Configuración básica del contenedor
-        initComponents(); // Inicializa los componentes de la UI
+        initWindow(); 
+        initComponents(); 
     }
 
     private void initWindow() {
-        getContentPane().setLayout(null); // Usando layout absoluto (no recomendable para escalabilidad)
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null); 
+        getContentPane().setBackground(Color.WHITE); 
     }
 
     private void initComponents() {
-        // Colores personalizados para la UI
+        /**
+         *  Colores personalizados para la UI
+         */
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
-        // ===== Título =====
+        /**
+         *  ===== Título =====
+         */
         JLabel lblTitle = new JLabel("Gestión de Trajes");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
         lblTitle.setBounds(30, 20, 300, 35);
         getContentPane().add(lblTitle);
 
-        // ===== Tabla =====
-        String[] columns = {"ID", "Cliente", "Nombre del traje", "Estado"};
-        // Hacemos la tabla no editable
+        /**
+         * ===== Tabla =====
+         */
+        String[] columns = {"Cliente", "Nombre del traje", "Estado"};
+        /**
+         * Hacemos la tabla no editable
+         */
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Evita que el usuario edite directamente la tabla
+                return false; 
             }
         };
         tableTrajes = new JTable(tableModel);
@@ -58,14 +66,16 @@ public class TrajesView extends JFrame {
         scrollPane.setBounds(30, 80, 820, 300);
         getContentPane().add(scrollPane);
 
-        // ===== Botones =====
+        /**
+         *  ===== Botones =====
+         */
         JButton btnNuevo = new JButton("Nuevo");
         btnNuevo.setBounds(130, 420, 130, 40);
         btnNuevo.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnNuevo.setForeground(Color.WHITE);
         btnNuevo.setBackground(darkGreen);
         btnNuevo.setFocusPainted(false);
-        btnNuevo.setBorderPainted(false); // Sin borde
+        btnNuevo.setBorderPainted(false); 
         getContentPane().add(btnNuevo);
 
         JButton btnEditar = new JButton("Editar");
@@ -92,12 +102,16 @@ public class TrajesView extends JFrame {
         btnVolver.setForeground(new Color(255, 255, 255));
         btnVolver.setBackground(darkGreen);
         btnVolver.setFocusPainted(false);
-        btnVolver.setBorderPainted(false); // Mantener estilo uniforme
+        btnVolver.setBorderPainted(false); 
         getContentPane().add(btnVolver);
 
-        // ===== Acciones de botones =====
+        /**
+         *  ===== Acciones de botones =====
+         */
         btnNuevo.addActionListener(e -> {
-            // Abrir formulario para crear nuevo traje
+            /**
+             *  Abrir formulario para crear nuevo traje
+             */
             new TrajeFormView().setVisible(true);
             dispose(); // Cierra la ventana actual
         });

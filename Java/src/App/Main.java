@@ -14,9 +14,13 @@ public class Main {
 
     public static void main(String[] args) {
         
-        // ===== Configurar Look & Feel =====
+        /**
+         *  ===== Configurar Look & Feel =====
+         */
         try {
-            // Recorre los LookAndFeel instalados en el sistema
+            /**
+             *  Recorre los LookAndFeel instalados en el sistema
+             */
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) { // Busca el Look & Feel "Nimbus"
                     UIManager.setLookAndFeel(info.getClassName()); // Aplica Nimbus
@@ -28,7 +32,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        // ===== Abrir ventana de Login =====
+        /** ===== Abrir ventana de Login =====
+         * 
+         */
         new LoginView().setVisible(true); // Muestra la ventana de inicio de sesión
     }
 }

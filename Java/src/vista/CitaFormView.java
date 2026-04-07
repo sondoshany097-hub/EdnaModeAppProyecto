@@ -5,7 +5,9 @@ import java.awt.*;
 
 public class CitaFormView extends JFrame {
 
-    // Campos de formulario
+    /**
+     * Campos de formulario
+     */
     private JComboBox<String> cbCliente;   // Lista de clientes
     private JComboBox<String> cbTraje;     // Lista de trajes
     private JComboBox<String> cbTaller;    // Lista de talleres
@@ -13,7 +15,9 @@ public class CitaFormView extends JFrame {
     private JTextField txtHora;            // Campo de hora
     private JComboBox<String> cbDuracion;  // Lista de duración de cita
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public CitaFormView() {
         setTitle("Edna Moda - Nueva Cita"); // Título ventana
         setSize(600, 500);                  // Tamaño de ventana
@@ -25,29 +29,39 @@ public class CitaFormView extends JFrame {
         inicializarComponentes();           // Inicialización de componentes
     }
 
-    // Configuración básica de la ventana
+    /**
+     * Configuración básica de la ventana
+     */
     private void inicializarVentana() {
         getContentPane().setLayout(null);        // Layout absoluto
         getContentPane().setBackground(Color.WHITE); // Fondo blanco
     }
 
-    // Inicialización de componentes gráficos
+    /**
+     * Inicialización de componentes gráficos
+     */
     private void inicializarComponentes() {
         Color darkGreen = new Color(85, 107, 47);  // Verde oscuro para botones
         Color textColor = new Color(40, 40, 40);   // Color de texto
         Color lightGray = new Color(245, 245, 245);// Color gris claro
 
-        // ===== Título =====
+        /**
+         * ===== Título =====
+         */
         JLabel lblTitle = new JLabel("Formulario de Cita");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         lblTitle.setForeground(darkGreen);
         lblTitle.setBounds(160, 20, 300, 30);
         getContentPane().add(lblTitle);
 
-        // ===== Campos de formulario =====
+        /**
+         * ===== Campos de formulario =====
+         */
 
-        // Cliente
-        JLabel lblCliente = new JLabel("Cliente:");
+        /**
+         * Cliente
+         */
+        JLabel lblCliente = new JLabel("Nombre de Cliente:");
         lblCliente.setBounds(60, 80, 120, 25);
         getContentPane().add(lblCliente);
 
@@ -56,7 +70,7 @@ public class CitaFormView extends JFrame {
         getContentPane().add(cbCliente);
 
         // Traje
-        JLabel lblTraje = new JLabel("Traje:");
+        JLabel lblTraje = new JLabel("Nombre de Traje:");
         lblTraje.setBounds(60, 130, 120, 25);
         getContentPane().add(lblTraje);
 
@@ -64,8 +78,10 @@ public class CitaFormView extends JFrame {
         cbTraje.setBounds(200, 130, 280, 30);
         getContentPane().add(cbTraje);
 
-        // Taller
-        JLabel lblTaller = new JLabel("Taller:");
+        /**
+         * Taller
+         */
+        JLabel lblTaller = new JLabel("Nombre de Taller:");
         lblTaller.setBounds(60, 180, 120, 25);
         getContentPane().add(lblTaller);
 
@@ -73,7 +89,9 @@ public class CitaFormView extends JFrame {
         cbTaller.setBounds(200, 180, 280, 30);
         getContentPane().add(cbTaller);
 
-        // Fecha
+        /**
+         * Fecha
+         */
         JLabel lblFecha = new JLabel("Fecha:");
         lblFecha.setBounds(60, 230, 120, 25);
         getContentPane().add(lblFecha);
@@ -82,7 +100,9 @@ public class CitaFormView extends JFrame {
         txtFecha.setBounds(200, 230, 280, 30);
         getContentPane().add(txtFecha);
 
-        // Hora
+        /**
+         * Hora
+         */
         JLabel lblHora = new JLabel("Hora:");
         lblHora.setBounds(60, 280, 120, 25);
         getContentPane().add(lblHora);
@@ -91,7 +111,9 @@ public class CitaFormView extends JFrame {
         txtHora.setBounds(200, 280, 280, 30);
         getContentPane().add(txtHora);
 
-        // Duración
+        /**
+         * Duración
+         */
         JLabel lblDuracion = new JLabel("Duración:");
         lblDuracion.setBounds(60, 330, 120, 25);
         getContentPane().add(lblDuracion);
@@ -100,9 +122,13 @@ public class CitaFormView extends JFrame {
         cbDuracion.setBounds(200, 330, 280, 30);
         getContentPane().add(cbDuracion);
 
-        // ===== Botones =====
+        /** ===== Botones =====
+         * 
+         */
 
-     // Botón Guardar
+     /**
+      * Botón Guardar
+      */
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(150, 390, 130, 42);
         btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -112,7 +138,9 @@ public class CitaFormView extends JFrame {
         btnGuardar.setBorderPainted(false);
         getContentPane().add(btnGuardar);
 
-        // Botón Cancelar
+        /**
+         * Botón Cancelar
+         */
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(320, 390, 130, 42);
         btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -121,16 +149,22 @@ public class CitaFormView extends JFrame {
         btnCancelar.setFocusPainted(false);
         getContentPane().add(btnCancelar);
 
-        // ===== Acciones de botones =====
+        /**
+         *  ===== Acciones de botones =====
+         */
 
-        // Guardar cita y volver a la lista de citas
+        /**
+         * Guardar cita y volver a la lista de citas
+         */
         btnGuardar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Cita guardada correctamente.");
             new CitasView().setVisible(true);
             dispose();
         });
 
-        // Cancelar y volver a la lista de citas
+        /**
+         * Cancelar y volver a la lista de citas
+         */
         btnCancelar.addActionListener(e -> {
             new CitasView().setVisible(true);
             dispose();

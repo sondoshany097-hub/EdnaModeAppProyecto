@@ -80,7 +80,7 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnFiltrar);
 
         // ===== Tabla de clientes =====
-        String[] columnas = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
+        String[] columnas = {"Nombre", "Superpoder", "Colores", "Tipo"};
         tableModel = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
         tableClientes = new JTable(tableModel);
         tableClientes.setRowHeight(28);

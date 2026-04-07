@@ -14,7 +14,9 @@ public class TrajeFormView extends JFrame {
     private JComboBox<String> cbNombreTraje; // ComboBox para seleccionar nombre del traje
     private JComboBox<String> cbEstado;      // ComboBox para seleccionar estado del traje
 
-    // Constructor
+    /**Constructor
+     * 
+     */
     public TrajeFormView() {
         setTitle("Edna Moda - Formulario de Traje");
         setSize(600, 450);               // Tamaño de ventana
@@ -26,19 +28,26 @@ public class TrajeFormView extends JFrame {
         initComponents();  // Inicialización de componentes
     }
 
-    // Configuración básica de la ventana
+    /**
+     * Configuración básica de la ventana
+     */
     private void initWindow() {
         getContentPane().setLayout(null);          // Layout absoluto
         getContentPane().setBackground(Color.WHITE); // Fondo blanco
     }
 
-    // Inicialización de los componentes del formulario
+    /**
+     * Inicialización de los componentes del formulario
+     */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
-        // ===== Título =====
+        /** 
+         * ===== Título =====
+         * 
+         */
         JLabel lblTitle = new JLabel("Formulario de Traje");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
@@ -46,15 +55,15 @@ public class TrajeFormView extends JFrame {
         getContentPane().add(lblTitle);
 
         // ===== ID del traje =====
-        JLabel lblId = new JLabel("ID del traje:");
-        lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblId.setForeground(textColor);
-        lblId.setBounds(70, 100, 130, 25);
-        getContentPane().add(lblId);
+        //JLabel lblId = new JLabel("ID del traje:");
+        //lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
+        //lblId.setForeground(textColor);
+        //lblId.setBounds(70, 100, 130, 25);
+        //getContentPane().add(lblId);
 
-        txtId = new JTextField();
-        txtId.setBounds(220, 100, 250, 32);
-        getContentPane().add(txtId);
+        //txtId = new JTextField();
+        //txtId.setBounds(220, 100, 250, 32);
+        //getContentPane().add(txtId);
 
         // ===== Cliente =====
         JLabel lblCliente = new JLabel("Cliente:");
@@ -88,7 +97,9 @@ public class TrajeFormView extends JFrame {
         cbNombreTraje.setBounds(220, 200, 250, 32);
         getContentPane().add(cbNombreTraje);
 
-        // ===== Estado del traje =====
+        /**
+         * ===== Estado del traje =====
+         */
         JLabel lblEstado = new JLabel("Estado:");
         lblEstado.setFont(new Font("SansSerif", Font.BOLD, 16));
         lblEstado.setForeground(textColor);
@@ -103,7 +114,9 @@ public class TrajeFormView extends JFrame {
         cbEstado.setBounds(220, 250, 250, 32);
         getContentPane().add(cbEstado);
 
-        // ===== Botones =====
+        /**
+         * ===== Botones =====
+         */
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(150, 330, 130, 42);
         btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -121,7 +134,9 @@ public class TrajeFormView extends JFrame {
         btnCancelar.setFocusPainted(false);
         getContentPane().add(btnCancelar);
 
-        // ===== Acciones de los botones =====
+        /**
+         *  ===== Acciones de los botones =====
+         */
         btnGuardar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Traje guardado correctamente.");
             new TrajesView().setVisible(true); // Volver a la ventana de trajes
