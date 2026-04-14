@@ -7,13 +7,17 @@ import java.awt.*;
 
 public class ClientesView extends JFrame {
 
-    // Componentes principales
-    private JTable tableClientes;       // Tabla que muestra los clientes
-    private DefaultTableModel tableModel; // Modelo de datos de la tabla
-    private JTextField txtBuscar;       // Campo para buscar clientes
-    private JComboBox<String> cbTipo;   // ComboBox para filtrar por tipo (HÉROE/VILLANO/Todos)
+    /**
+     * Componentes principales
+     */
+    private JTable tableClientes;       
+    private DefaultTableModel tableModel; 
+    private JTextField txtBuscar;       
+    private JComboBox<String> cbTipo;   
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public ClientesView() {
         setTitle("Edna Moda - Clientes");
         setSize(900, 600);
@@ -21,33 +25,43 @@ public class ClientesView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        initWindow();     // Configuración básica de la ventana
-        initComponents(); // Inicialización de todos los componentes
+        initWindow();     
+        initComponents(); 
     }
 
-    // Configuración básica de la ventana
+    /**
+     * Configuración básica de la ventana
+     */
     private void initWindow() {
-        getContentPane().setLayout(null);        // Layout absoluto
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null);        
+        getContentPane().setBackground(Color.WHITE); 
     }
 
-    // Inicialización de componentes
+    /**Inicialización de componentes
+     * 
+     */
     private void initComponents() {
-        // Colores personalizados
+        /**
+         *  Colores personalizados
+         */
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
         Color darkRed = new Color(140, 40, 40);
 
-        // ===== Título =====
+        /**
+         * ===== Título =====
+         */
         JLabel lblTitle = new JLabel("Gestión de Clientes");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
         lblTitle.setBounds(30, 20, 300, 35);
         getContentPane().add(lblTitle);
 
-        // ===== Buscador y filtro =====
+        /**
+         * ===== Buscador y filtro =====
+         */
         JLabel lblBuscar = new JLabel("Buscar:");
         lblBuscar.setFont(new Font("SansSerif", Font.BOLD, 16));
         lblBuscar.setForeground(textColor);
@@ -78,8 +92,12 @@ public class ClientesView extends JFrame {
         btnFiltrar.setFocusPainted(false);
         btnFiltrar.setBorderPainted(false);
         getContentPane().add(btnFiltrar);
+        
 
-        // ===== Tabla de clientes =====
+        /** 
+         * ===== Tabla de clientes =====
+         * 
+         */
         String[] columnas = {"Nombre", "Superpoder", "Colores", "Tipo"};
         tableModel = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
         tableClientes = new JTable(tableModel);
@@ -94,7 +112,9 @@ public class ClientesView extends JFrame {
         scrollPane.setBounds(30, 141, 820, 279);
         getContentPane().add(scrollPane);
 
-        // ===== Botones de acciones =====
+        /**
+         * ===== Botones de acciones =====
+         */
         JButton btnNuevo = new JButton("Nuevo");
         btnNuevo.setBounds(134, 469, 130, 40);
         btnNuevo.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -117,7 +137,7 @@ public class ClientesView extends JFrame {
         btnBorrar.setBounds(450, 469, 130, 40);
         btnBorrar.setFont(new Font("SansSerif", Font.BOLD, 16));
         btnBorrar.setForeground(new Color(255, 255, 255));
-        btnBorrar.setBackground(new Color(140, 40, 40)); // rojo oscuro
+        btnBorrar.setBackground(new Color(140, 40, 40)); 
         btnBorrar.setFocusPainted(false);
         btnBorrar.setBorderPainted(false);
         getContentPane().add(btnBorrar);
@@ -128,13 +148,28 @@ public class ClientesView extends JFrame {
         btnVolver.setForeground(new Color(255, 255, 255));
         btnVolver.setBackground(darkGreen);
         getContentPane().add(btnVolver);
-
-        // ===== Acciones de botones =====
+        
+        JButton btnMasTrajes = new JButton("Más Trajes");
+        btnMasTrajes.setBounds(720, 85, 120, 32);
+        btnMasTrajes.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnMasTrajes.setForeground(Color.WHITE);
+        btnMasTrajes.setBackground(darkGreen);
+        btnMasTrajes.setFocusPainted(false);
+        btnMasTrajes.setBorderPainted(false);
+        getContentPane().add(btnMasTrajes);
+        /**
+         * ===== Acciones de botones =====
+         */
         btnNuevo.addActionListener(e -> {
             new ClienteFormView().setVisible(true);
             dispose();
         });
-
+        
+        btnMasTrajes.addActionListener(e -> {
+            new TrajesView().setVisible(true);
+            dispose();
+        });
+        
         btnEditar.addActionListener(e -> {
             int row = tableClientes.getSelectedRow();
             if (row == -1) {
@@ -158,7 +193,7 @@ public class ClientesView extends JFrame {
                 );
 
                 if (confirm == JOptionPane.YES_OPTION) {
-                    tableModel.removeRow(row); // Borra la fila seleccionada
+                    tableModel.removeRow(row); 
                 }
             }
         });
@@ -168,11 +203,21 @@ public class ClientesView extends JFrame {
             dispose();
         });
 
-        // Filtrar tabla por búsqueda y tipo
+        /**
+         * Filtrar tabla por búsqueda y tipo
+         */
         btnFiltrar.addActionListener(e -> filtrarClientes());
     }
+    
+    
 
-    // Método para aplicar estilo consistente a botones
+    /**
+     * Método para aplicar estilo consistente a botones
+     * 
+     * @param button
+     * @param background
+     * @param foreground
+     */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setBackground(background);
@@ -184,12 +229,17 @@ public class ClientesView extends JFrame {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
-    // Método de filtrado de clientes (actualmente limpia la tabla)
+    /**
+     * Método de filtrado de clientes (actualmente limpia la tabla)
+     * 
+     */
     private void filtrarClientes() {
         String texto = txtBuscar.getText().trim().toLowerCase();
         String tipoSeleccionado = cbTipo.getSelectedItem().toString();
 
-        // Limpiar tabla antes de filtrar
+        /**
+         *  Limpiar tabla antes de filtrar
+         */
         tableModel.setRowCount(0);
     }
 }

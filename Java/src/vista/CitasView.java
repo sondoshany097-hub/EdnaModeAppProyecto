@@ -12,33 +12,33 @@ public class CitasView extends JFrame {
     /**
      * Componentes principales
      */
-    private JTable tableCitas;             // Tabla donde se muestran las citas
-    private DefaultTableModel tableModel;  // Modelo de datos de la tabla
-    private JButton btnNueva;              // Botón para crear nueva cita
-    private JButton btnEditar;             // Botón para editar cita seleccionada
-    private JButton btnBorrar;             // Botón para eliminar cita
-    private JButton btnVolver;             // Botón para volver al menú principal
+    private JTable tableCitas;             
+    private DefaultTableModel tableModel;  
+    private JButton btnNueva;              
+    private JButton btnEditar;          
+    private JButton btnBorrar;            
+    private JButton btnVolver;            
 
     /**
      * Constructor
      */
     public CitasView() {
-        setTitle("Edna Moda - Citas");         // Título de la ventana
-        setSize(950, 600);                    // Tamaño de la ventana
-        setLocationRelativeTo(null);          // Centrar ventana en pantalla
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar app al salir
-        setResizable(false);                  // No permitir redimensionar
+        setTitle("Edna Moda - Citas");         
+        setSize(950, 600);                    
+        setLocationRelativeTo(null);          
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setResizable(false);                  
 
-        inicializarVentana();                 // Configuración básica
-        inicializarComponentes();             // Crear componentes
+        inicializarVentana();                 
+        inicializarComponentes();             
     }
 
     /**
      * Configuración del panel principal
      */
     private void inicializarVentana() {
-        getContentPane().setLayout(null);     // Layout absoluto
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null);     
+        getContentPane().setBackground(Color.WHITE); 
     }
 
     /**
@@ -65,8 +65,8 @@ public class CitasView extends JFrame {
         /**
          * ===== Tabla de citas =====
          */
-        String[] columnas = {"Nombre de Cliente", "Nombre de Traje", "Nombre de Taller", "Fecha", "Hora", "Duración"};
-        tableModel = new DefaultTableModel(columnas, 0); // Modelo sin filas iniciales
+        String[] columnas = { "Fecha", "Hora", "Duración", "Cliente", "Traje", "Taller"};
+        tableModel = new DefaultTableModel(columnas, 0); // 
         tableCitas = new JTable(tableModel);
         tableCitas.setRowHeight(28);
         tableCitas.setFont(new Font("SansSerif", Font.PLAIN, 14));

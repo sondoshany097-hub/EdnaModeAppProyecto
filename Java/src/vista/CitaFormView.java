@@ -8,42 +8,42 @@ public class CitaFormView extends JFrame {
     /**
      * Campos de formulario
      */
-    private JComboBox<String> cbCliente;   // Lista de clientes
-    private JComboBox<String> cbTraje;     // Lista de trajes
-    private JComboBox<String> cbTaller;    // Lista de talleres
-    private JTextField txtFecha;           // Campo de fecha
-    private JTextField txtHora;            // Campo de hora
-    private JComboBox<String> cbDuracion;  // Lista de duración de cita
+    private JComboBox<String> cbCliente;   
+    private JComboBox<String> cbTraje;     
+    private JComboBox<String> cbTaller;    
+    private JTextField txtFecha;          
+    private JTextField txtHora;           
+    private JComboBox<String> cbDuracion; 
 
     /**
      * Constructor
      */
     public CitaFormView() {
-        setTitle("Edna Moda - Nueva Cita"); // Título ventana
-        setSize(600, 500);                  // Tamaño de ventana
-        setLocationRelativeTo(null);        // Centrar en pantalla
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar app al salir
-        setResizable(false);                // No permitir redimensionar
+        setTitle("Edna Moda - Nueva Cita"); 
+        setSize(600, 500);                  
+        setLocationRelativeTo(null);       
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setResizable(false);                
 
-        inicializarVentana();               // Configuración base de ventana
-        inicializarComponentes();           // Inicialización de componentes
+        inicializarVentana();              
+        inicializarComponentes();           
     }
 
     /**
      * Configuración básica de la ventana
      */
     private void inicializarVentana() {
-        getContentPane().setLayout(null);        // Layout absoluto
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null);       
+        getContentPane().setBackground(Color.WHITE); 
     }
 
     /**
      * Inicialización de componentes gráficos
      */
     private void inicializarComponentes() {
-        Color darkGreen = new Color(85, 107, 47);  // Verde oscuro para botones
-        Color textColor = new Color(40, 40, 40);   // Color de texto
-        Color lightGray = new Color(245, 245, 245);// Color gris claro
+        Color darkGreen = new Color(85, 107, 47);  
+        Color textColor = new Color(40, 40, 40);   
+        Color lightGray = new Color(245, 245, 245);
 
         /**
          * ===== Título =====

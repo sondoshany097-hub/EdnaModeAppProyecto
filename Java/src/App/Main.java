@@ -28,11 +28,14 @@ public class Main {
                 }
             }
         } catch (Exception e) {
-            // Si ocurre algún error al aplicar Nimbus, imprime la traza
+            /**
+             * Si ocurre algún error al aplicar Nimbus, imprime la traza
+             */
             e.printStackTrace();
         }
 
-        /** ===== Abrir ventana de Login =====
+        /** 
+         * ===== Abrir ventana de Login =====
          * 
          */
         new LoginView().setVisible(true); // Muestra la ventana de inicio de sesión
