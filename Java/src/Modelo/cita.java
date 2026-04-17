@@ -6,19 +6,19 @@ package Modelo;
 /**
  * 
  */
-public class cita {
+public class Cita {
 	 private int IdCita;
-	    private int IdCliente;
-	    private int IdTraje;
-	    private int IdTaller;
-	    private String Fecha;
-	    private String Hora;
-	    private int Duracion;
+	 private int IdCliente;
+	 private int IdTraje;
+	 private int IdTaller;
+	 private String Fecha;
+	 private String Hora;
+	 private int Duracion;
 
-	    public cita() {
+	    public Cita() {
 	    }
 
-	    public cita(int IdCita, int IdCliente, int IdTraje, int IdTaller, String Fecha, String Hora, int Duracion ) {
+	    public Cita(int IdCita, int IdCliente, int IdTraje, int IdTaller, String Fecha, String Hora, int Duracion ) {
 	        this.IdCita = IdCita;
 	        this.IdCliente = IdCliente;
 	        this.IdTraje = IdTraje;
@@ -84,5 +84,3 @@ public class cita {
 	    }
 	    
 	}
-
-

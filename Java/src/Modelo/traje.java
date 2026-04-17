@@ -6,18 +6,18 @@ package Modelo;
 /**
  * 
  */
-public class traje {
+public class Traje {
 	private int IdTraje;
 	private int IdCliente;
 	private String NombreTraje;
 	private String Estado;
 
 	
-	public traje() {
+	public Traje() {
 		
 	}
 	
-	public traje(int IdTraje, int IdCliente, String NombreTraje, String Estado ) {
+	public Traje(int IdTraje, int IdCliente, String NombreTraje, String Estado ) {
 		this.IdTraje = IdTraje;
 		this.IdCliente = IdCliente;
 		this.NombreTraje = NombreTraje;
@@ -55,3 +55,4 @@ public class traje {
 	}
 	
 }
+
