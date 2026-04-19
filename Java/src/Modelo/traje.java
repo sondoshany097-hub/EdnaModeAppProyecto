@@ -43,14 +43,14 @@ public class Traje {
 	public String getNombreTraje() {
 		return NombreTraje;
 	}
-	public void setNombreTraje() {
+	public void setNombreTraje(String NombreTraje) {
 		this.NombreTraje = NombreTraje;
 	}
 	
-	private String getEstado() {
+	public String getEstado() {
 		return Estado;
 	}
-	private void setEstado() {
+	public void setEstado (String Estado) {
 		this.Estado = Estado;
 	}
 	
