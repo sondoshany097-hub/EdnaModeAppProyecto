@@ -2,135 +2,155 @@
  * 
  */
 package vista;
+import Controlador.TallerController;
+import Modelo.Taller;
 
-import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Ventana de formulario para agregar o editar un Taller.
- */
 public class TallerFormView extends JFrame {
 
-    private JTextField txtId;          // Campo para el ID del taller
-    private JTextField txtNombreSala;  // Campo para el nombre de la sala
-    private JComboBox<String> cbTipoSala; // ComboBox para seleccionar el tipo de sala
+    private JTextField txtId;
+    private JTextField txtNombreSala;
+    private JComboBox<String> cbTipoSala;
 
-    // Constructor
+    private Taller tallerEditar;
+    private TallerController tallerController;
+
     public TallerFormView() {
+        this(null);
+    }
+
+    public TallerFormView(Taller taller) {
+        this.tallerEditar = taller;
+        this.tallerController = new TallerController();
+
         setTitle("Edna Moda - Formulario de Taller");
-        setSize(580, 430);               // Tamaño de ventana
-        setLocationRelativeTo(null);      // Centrar ventana
+        setSize(620, 500);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);             // No permitir redimensionar
+        setResizable(false);
 
-        initWindow();      // Configuración de la ventana
-        initComponents();  // Inicialización de componentes
+        initWindow();
+        initComponents();
+
+        if (tallerEditar != null) {
+            cargarDatosTaller();
+        }
     }
 
-    /**
-     * Configuración básica de la ventana
-     * 
-     */
     private void initWindow() {
-        getContentPane().setLayout(null);          // Layout absoluto
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
     }
 
-    /**
-     * Inicialización de los componentes del formulario
-     * 
-     */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
-        /**
-         * ===== Título =====
-         */
         JLabel lblTitle = new JLabel("Formulario de Taller");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(150, 30, 280, 35);
+        lblTitle.setBounds(160, 30, 320, 35);
         getContentPane().add(lblTitle);
 
-        // ===== ID del taller =====
-        //JLabel lblId = new JLabel("ID del taller:");
-        //lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
-        //lblId.setForeground(textColor);
-        //lblId.setBounds(70, 110, 140, 25);
-        //getContentPane().add(lblId);
+        JLabel lblId = new JLabel("ID del taller:");
+        lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
+        lblId.setBounds(70, 100, 140, 25);
+        getContentPane().add(lblId);
 
-        //txtId = new JTextField();
-        //txtId.setBounds(220, 110, 230, 32);
-        //getContentPane().add(txtId);
+        txtId = new JTextField("Auto-generated");
+        txtId.setBounds(230, 100, 250, 32);
+        txtId.setEditable(false);
+        txtId.setBackground(new Color(235, 235, 235));
+        getContentPane().add(txtId);
 
-        /** 
-         * ===== Nombre de sala =====
-         * 
-         */
-        JLabel lblNombreSala = new JLabel("Nombre de sala:");
+        JLabel lblNombreSala = new JLabel("Nombre sala:");
         lblNombreSala.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblNombreSala.setForeground(textColor);
-        lblNombreSala.setBounds(70, 170, 140, 25);
+        lblNombreSala.setBounds(70, 160, 140, 25);
         getContentPane().add(lblNombreSala);
 
         txtNombreSala = new JTextField();
-        txtNombreSala.setBounds(220, 170, 230, 32);
+        txtNombreSala.setBounds(230, 160, 250, 32);
         getContentPane().add(txtNombreSala);
 
-        /**
-         * ===== Tipo de sala =====
-         * 
-         */
-        JLabel lblTipoSala = new JLabel("Tipo de sala:");
+        JLabel lblTipoSala = new JLabel("Tipo sala:");
         lblTipoSala.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblTipoSala.setForeground(textColor);
-        lblTipoSala.setBounds(70, 230, 140, 25);
+        lblTipoSala.setBounds(70, 220, 140, 25);
         getContentPane().add(lblTipoSala);
 
-        cbTipoSala = new JComboBox<>(new String[]{
-                "Diseño",
-                "Costura",
-                "Pruebas"
-        });
-        cbTipoSala.setBounds(220, 230, 230, 32);
+        cbTipoSala = new JComboBox<>(new String[]{"DISEÑO", "COSTURA", "PRUEBAS"});
+        cbTipoSala.setBounds(230, 220, 250, 32);
         getContentPane().add(cbTipoSala);
 
-        /**
-         *  ===== Botones =====
-         */
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(140, 310, 130, 40);
-        btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnGuardar.setForeground(Color.WHITE);
-        btnGuardar.setBackground(darkGreen);
-        btnGuardar.setFocusPainted(false);
-        btnGuardar.setBorderPainted(false);
-        getContentPane().add(btnGuardar);
-
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(300, 310, 130, 40);
-        btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnCancelar.setForeground(new Color(255, 255, 255));
-        btnCancelar.setBackground(darkGreen);
-        btnCancelar.setFocusPainted(false);
+
+        styleButton(btnGuardar, darkGreen, Color.WHITE);
+        styleButton(btnCancelar, lightGray, textColor);
+        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+
+        btnGuardar.setBounds(150, 350, 130, 42);
+        btnCancelar.setBounds(320, 350, 130, 42);
+
+        getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);
 
-        /**
-         *  ===== Acciones de los botones =====
-         */
-        btnGuardar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Taller guardado correctamente.");
-            new TalleresView().setVisible(true); // Volver a la ventana de talleres
-            dispose();                             // Cierra el formulario
-        });
+        btnGuardar.addActionListener(e -> guardarOActualizarTaller());
 
         btnCancelar.addActionListener(e -> {
-            new TalleresView().setVisible(true); // Volver a la ventana de talleres
-            dispose();                             // Cierra el formulario
+            new TalleresView().setVisible(true);
+            dispose();
         });
+    }
+
+    private void cargarDatosTaller() {
+        txtId.setText(String.valueOf(tallerEditar.getIdTaller()));
+        txtNombreSala.setText(tallerEditar.getNombresala());
+        cbTipoSala.setSelectedItem(tallerEditar.getTiposala());
+    }
+
+    private void guardarOActualizarTaller() {
+        String nombreSala = txtNombreSala.getText().trim();
+        String tipoSala = cbTipoSala.getSelectedItem().toString();
+
+        if (nombreSala.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+            return;
+        }
+
+        Taller taller = new Taller();
+        taller.setNombreSala(nombreSala);
+        taller.setTipoSala(tipoSala);
+
+        boolean resultado;
+
+        if (tallerEditar == null) {
+            resultado = tallerController.guardarTaller(taller);
+        } else {
+            taller.setIdTaller(tallerEditar.getIdTaller());
+            resultado = tallerController.actiualizarTaller(taller);
+        }
+
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Operación realizada correctamente.");
+            new TalleresView().setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error en la operación.");
+        }
+    }
+
+    private void styleButton(JButton button, Color background, Color foreground) {
+        button.setFont(new Font("SansSerif", Font.BOLD, 16));
+        button.setForeground(foreground);
+        button.setBackground(background);
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
 

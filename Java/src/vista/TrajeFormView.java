@@ -1,151 +1,187 @@
 package vista;
+import Controlador.ClienteConroller;
+import Controlador.TrajeController;
+import Modelo.Cliente;
+import Modelo.ItemCombo;
+import Modelo.Traje;
 
-import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
-/**
- * Ventana de formulario para agregar o editar un Traje.
- */
 public class TrajeFormView extends JFrame {
 
-    private JTextField txtId;          // Campo para el ID del traje
-    private JComboBox<String> cbCliente;      // ComboBox para seleccionar cliente
-    private JComboBox<String> cbNombreTraje; // ComboBox para seleccionar nombre del traje
-    private JComboBox<String> cbEstado;      // ComboBox para seleccionar estado del traje
+    private JTextField txtId;
+    private JComboBox<ItemCombo> cbCliente;
+    private JTextField txtNombre;
+    private JComboBox<String> cbEstado;
 
-    /**Constructor
-     * 
-     */
+    private Traje trajeEditar;
+    private TrajeController trajeController;
+    private ClienteConroller clienteController;
+
     public TrajeFormView() {
+        this(null);
+    }
+
+    public TrajeFormView(Traje traje) {
+        this.trajeEditar = traje;
+        this.trajeController = new TrajeController();
+        this.clienteController = new ClienteConroller();
+
         setTitle("Edna Moda - Formulario de Traje");
-        setSize(600, 450);               // Tamaño de ventana
-        setLocationRelativeTo(null);      // Centrar ventana
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);             // No permitir redimensionar
+        setSize(650, 520);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        initWindow();      // Configuración de la ventana
-        initComponents();  // Inicialización de componentes
+        initWindow();
+        initComponents();
+        cargarClientes();
+
+        if (trajeEditar != null) {
+            cargarDatosTraje();
+        }
     }
 
-    /**
-     * Configuración básica de la ventana
-     */
     private void initWindow() {
-        getContentPane().setLayout(null);          // Layout absoluto
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco
+        getContentPane().setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
     }
 
-    /**
-     * Inicialización de los componentes del formulario
-     */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
-        /** 
-         * ===== Título =====
-         * 
-         */
         JLabel lblTitle = new JLabel("Formulario de Traje");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(160, 30, 280, 35);
+        lblTitle.setBounds(170, 25, 320, 35);
         getContentPane().add(lblTitle);
 
-        // ===== ID del traje =====
-        //JLabel lblId = new JLabel("ID del traje:");
-        //lblId.setFont(new Font("SansSerif", Font.BOLD, 16));
-        //lblId.setForeground(textColor);
-        //lblId.setBounds(70, 100, 130, 25);
-        //getContentPane().add(lblId);
-
-        //txtId = new JTextField();
-        //txtId.setBounds(220, 100, 250, 32);
-        //getContentPane().add(txtId);
-
-        // ===== Cliente =====
+        JLabel lblId = new JLabel("ID:");
         JLabel lblCliente = new JLabel("Cliente:");
-        lblCliente.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblCliente.setForeground(textColor);
-        lblCliente.setBounds(70, 150, 130, 25);
-        getContentPane().add(lblCliente);
+        JLabel lblNombre = new JLabel("Nombre:");
+        JLabel lblEstado = new JLabel("Estado:");
 
-        cbCliente = new JComboBox<>(new String[]{
-                "Mr. Incredible",
-                "Elastigirl",
-                "Frozone",
-                "Syndrome"
-        });
-        cbCliente.setBounds(220, 150, 250, 32);
+        JLabel[] labels = {lblId, lblCliente, lblNombre, lblEstado};
+
+        int y = 100;
+        for (JLabel label : labels) {
+            label.setFont(new Font("SansSerif", Font.BOLD, 16));
+            label.setForeground(textColor);
+            label.setBounds(80, y, 120, 25);
+            getContentPane().add(label);
+            y += 65;
+        }
+
+        txtId = new JTextField("Auto-generated");
+        txtId.setBounds(220, 100, 280, 32);
+        txtId.setEditable(false);
+        txtId.setBackground(new Color(235, 235, 235));
+        getContentPane().add(txtId);
+
+        cbCliente = new JComboBox<>();
+        cbCliente.setBounds(220, 165, 280, 32);
         getContentPane().add(cbCliente);
 
-        // ===== Nombre del traje =====
-        JLabel lblNombreTraje = new JLabel("Nombre del traje:");
-        lblNombreTraje.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblNombreTraje.setForeground(textColor);
-        lblNombreTraje.setBounds(70, 200, 140, 25);
-        getContentPane().add(lblNombreTraje);
+        txtNombre = new JTextField();
+        txtNombre.setBounds(220, 230, 280, 32);
+        getContentPane().add(txtNombre);
 
-        cbNombreTraje = new JComboBox<>(new String[]{
-              "Traje principal",
-              "Traje de combate",
-              "Traje secundario",
-              "Traje de gala"
-       });
-        cbNombreTraje.setBounds(220, 200, 250, 32);
-        getContentPane().add(cbNombreTraje);
-
-        /**
-         * ===== Estado del traje =====
-         */
-        JLabel lblEstado = new JLabel("Estado:");
-        lblEstado.setFont(new Font("SansSerif", Font.BOLD, 16));
-        lblEstado.setForeground(textColor);
-        lblEstado.setBounds(70, 250, 130, 25);
-        getContentPane().add(lblEstado);
-
-        cbEstado = new JComboBox<>(new String[]{
-                "Diseño",
-                "Costura",
-                "Taller"
-        });
-        cbEstado.setBounds(220, 250, 250, 32);
+        cbEstado = new JComboBox<>(new String[]{"Diseño", "Costura", "Taller"});
+        cbEstado.setBounds(220, 295, 280, 32);
         getContentPane().add(cbEstado);
 
-        /**
-         * ===== Botones =====
-         */
         JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.setBounds(150, 330, 130, 42);
-        btnGuardar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnGuardar.setForeground(Color.WHITE);
-        btnGuardar.setBackground(darkGreen);
-        btnGuardar.setFocusPainted(false);
-        btnGuardar.setBorderPainted(false);
-        getContentPane().add(btnGuardar);
-
         JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(320, 330, 130, 42);
-        btnCancelar.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnCancelar.setForeground(new Color(255, 255, 255));
-        btnCancelar.setBackground(darkGreen);
-        btnCancelar.setFocusPainted(false);
+
+        styleButton(btnGuardar, darkGreen, Color.WHITE);
+        styleButton(btnCancelar, lightGray, textColor);
+        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+
+        btnGuardar.setBounds(170, 390, 130, 42);
+        btnCancelar.setBounds(340, 390, 130, 42);
+
+        getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);
 
-        /**
-         *  ===== Acciones de los botones =====
-         */
-        btnGuardar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Traje guardado correctamente.");
-            new TrajesView().setVisible(true); // Volver a la ventana de trajes
-            dispose();                           // Cierra el formulario
-        });
+        btnGuardar.addActionListener(e -> guardarOActualizarTraje());
 
         btnCancelar.addActionListener(e -> {
-            new TrajesView().setVisible(true); // Volver a la ventana de trajes
-            dispose();                           // Cierra el formulario
+            new TrajesView().setVisible(true);
+            dispose();
         });
+    }
+
+    private void cargarClientes() {
+        cbCliente.removeAllItems();
+        List<Cliente> lista = clienteController.listarClientes();
+
+        for (Cliente cliente : lista) {
+            cbCliente.addItem(new ItemCombo(cliente.getIdCliente(), cliente.getNombreHero()));
+        }
+    }
+
+    private void cargarDatosTraje() {
+        txtId.setText(String.valueOf(trajeEditar.getIdTraje()));
+        txtNombre.setText(trajeEditar.getNombreTraje() == null ? "" : trajeEditar.getNombreTraje());
+        cbEstado.setSelectedItem(trajeEditar.getEstado());
+        seleccionarCliente(trajeEditar.getIdCliente());
+    }
+
+    private void seleccionarCliente(int idBuscado) {
+        for (int i = 0; i < cbCliente.getItemCount(); i++) {
+            ItemCombo item = cbCliente.getItemAt(i);
+            if (item.getId() == idBuscado) {
+                cbCliente.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+
+    private void guardarOActualizarTraje() {
+        ItemCombo clienteSeleccionado = (ItemCombo) cbCliente.getSelectedItem();
+        String nombre = txtNombre.getText().trim();
+        String estado = cbEstado.getSelectedItem().toString();
+
+        if (clienteSeleccionado == null || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos.");
+            return;
+        }
+
+        Traje traje = new Traje();
+        traje.setIdCliente(clienteSeleccionado.getId());
+        traje.setNombreTraje(nombre);
+        traje.setEstado(estado);
+
+        boolean resultado;
+
+        if (trajeEditar == null) {
+            resultado = trajeController.gurdarTraje(traje);
+        } else {
+            traje.setIdTraje(trajeEditar.getIdTraje());
+            resultado = trajeController.actiualizarTraje(traje);
+        }
+
+        if (resultado) {
+            JOptionPane.showMessageDialog(this, "Operación realizada correctamente.");
+            new TrajesView().setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error en la operación.");
+        }
+    }
+
+    private void styleButton(JButton button, Color background, Color foreground) {
+        button.setFont(new Font("SansSerif", Font.BOLD, 16));
+        button.setForeground(foreground);
+        button.setBackground(background);
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }
