@@ -138,7 +138,7 @@ public class CitasView extends JFrame {
         }
     }
 
-    private void borrarCitaSeleccionada() {
+   private void borrarCitaSeleccionada() {
         int row = tableCitas.getSelectedRow();
 
         if (row == -1) {
@@ -156,14 +156,14 @@ public class CitasView extends JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean eliminado = citaController.eliminarCita(idCita);
+          boolean eliminado = citaController.eliminarCita(idCita);
 
             if (eliminado) {
                 JOptionPane.showMessageDialog(this, "Cita borrada correctamente.");
                 cargarCitasDesdeBD();
             } else {
-                JOptionPane.showMessageDialog(this, "Error al borrar cita.");
-            }
+              JOptionPane.showMessageDialog(this, "Error al borrar cita.");
+           }
         }
     }
 

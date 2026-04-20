@@ -60,7 +60,7 @@ public class ClienteDAO {
 	            }
 
 	        } catch (SQLException e) {
-	            System.out.println("Error listing clientes: " + e.getMessage());
+	            System.out.println("Error lista de clientes: " + e.getMessage());
 	        }
 
 	        return lista;

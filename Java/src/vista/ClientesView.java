@@ -77,7 +77,7 @@ public class ClientesView extends JFrame {
         btnFiltrar.setBounds(718, 82, 120, 32);
         getContentPane().add(btnFiltrar);
 
-        String[] columns = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
+        String[] columns = {"Nombre", "Superpoder", "Colores", "Tipo"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -116,7 +116,7 @@ public class ClientesView extends JFrame {
         
         JButton btnMasTrajes = new JButton("Trajes");
         btnMasTrajes.setBackground(new Color(85, 107, 47));
-        btnMasTrajes.setBounds(586, 83, 138, 32);
+        btnMasTrajes.setBounds(600, 78, 120, 40);
         styleButton(btnMasTrajes, darkGreen, textColor.WHITE);
         btnMasTrajes.setBounds(590, 85, 120, 32);
         getContentPane().add(btnMasTrajes);
