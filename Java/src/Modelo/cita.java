@@ -4,6 +4,7 @@
 package Modelo;
 
 /**
+ * difinar los clses y su atribute.
  * 
  */
 public class Cita {

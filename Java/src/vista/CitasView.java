@@ -50,7 +50,7 @@ public class CitasView extends JFrame {
         lblTitle.setBounds(30, 20, 320, 35);
         getContentPane().add(lblTitle);
 
-        String[] columns = {"ID", "Cliente", "Traje", "Taller", "Fecha", "Hora", "Duración"};
+        String[] columns = {"Cliente", "Traje", "Taller", "Fecha", "Hora", "Duración"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -69,11 +69,12 @@ public class CitasView extends JFrame {
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar");
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setBackground(new Color(85, 107, 47));
 
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, lightGray, textColor);
+        styleButton(btnVolver, lightGray, textColor.white);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnNuevo.setBounds(170, 500, 130, 40);
@@ -169,7 +170,7 @@ public class CitasView extends JFrame {
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
-        button.setBackground(background);
+        button.setBackground(new Color(85, 107, 47));
         button.setOpaque(true);
         button.setContentAreaFilled(true);
         button.setBorderPainted(false);

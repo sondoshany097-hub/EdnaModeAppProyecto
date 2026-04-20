@@ -88,7 +88,7 @@ public class TallerFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
 
         styleButton(btnGuardar, darkGreen, Color.WHITE);
-        styleButton(btnCancelar, lightGray, textColor);
+        styleButton(btnCancelar, darkGreen, textColor.WHITE);
         btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnGuardar.setBounds(150, 350, 130, 42);

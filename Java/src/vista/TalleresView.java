@@ -70,7 +70,7 @@ public class TalleresView extends JFrame {
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, lightGray, textColor);
+        styleButton(btnVolver, darkGreen, textColor.WHITE);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnNuevo.setBounds(120, 470, 130, 40);

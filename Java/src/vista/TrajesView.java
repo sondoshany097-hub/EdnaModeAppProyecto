@@ -47,7 +47,7 @@ public class TrajesView extends JFrame {
         lblTitle.setBounds(30, 20, 320, 35);
         getContentPane().add(lblTitle);
 
-        String[] columns = {"ID", "Cliente", "Traje", "Estado"};
+        String[] columns = {"Cliente", "Traje", "Estado"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -66,12 +66,13 @@ public class TrajesView extends JFrame {
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar");
         JButton btnVolver = new JButton("Volver");
+        btnVolver.setBackground(new Color(85, 107, 47));
 
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, lightGray, textColor);
-        btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+        styleButton(btnVolver, darkGreen, Color.WHITE);
+        btnVolver.setBorder(BorderFactory.createLineBorder(new Color(85, 107, 47)));
 
         btnNuevo.setBounds(150, 560, 160, 45);
         btnEditar.setBounds(370, 560, 160, 45);

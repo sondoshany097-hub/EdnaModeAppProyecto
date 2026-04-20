@@ -119,7 +119,7 @@ public class CitaFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
 
         styleButton(btnGuardar, darkGreen, Color.WHITE);
-        styleButton(btnCancelar, lightGray, Color.BLACK);
+        styleButton(btnCancelar, darkGreen, Color.WHITE);
         btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnGuardar.setBounds(180, 510, 130, 42);

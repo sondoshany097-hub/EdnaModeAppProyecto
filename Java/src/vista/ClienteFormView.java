@@ -97,8 +97,8 @@ public class ClienteFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
 
         styleButton(btnGuardar, darkGreen, Color.WHITE);
-        styleButton(btnCancelar, lightGray, textColor);
-        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+        styleButton(btnCancelar, darkGreen, textColor.WHITE);
+        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(85, 107, 47)));
 
         btnGuardar.setBounds(170, 410, 130, 42);
         btnCancelar.setBounds(340, 410, 130, 42);
