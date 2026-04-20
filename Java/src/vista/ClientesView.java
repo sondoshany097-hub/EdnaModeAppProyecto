@@ -74,7 +74,7 @@ public class ClientesView extends JFrame {
 
         JButton btnFiltrar = new JButton("Filtrar");
         styleButton(btnFiltrar, darkGreen, Color.WHITE);
-        btnFiltrar.setBounds(590, 85, 120, 32);
+        btnFiltrar.setBounds(718, 82, 120, 32);
         getContentPane().add(btnFiltrar);
 
         String[] columns = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
@@ -113,10 +113,22 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnEditar);
         getContentPane().add(btnBorrar);
         getContentPane().add(btnVolver);
+        
+        JButton btnMasTrajes = new JButton("Trajes");
+        btnMasTrajes.setBackground(new Color(85, 107, 47));
+        btnMasTrajes.setBounds(586, 83, 138, 32);
+        styleButton(btnMasTrajes, darkGreen, textColor.WHITE);
+        btnMasTrajes.setBounds(590, 85, 120, 32);
+        getContentPane().add(btnMasTrajes);
 
         btnNuevo.addActionListener(e -> {
             new ClienteFormView().setVisible(true);
             dispose();
+        });
+        
+        btnMasTrajes.addActionListener(e -> {
+            new TrajesView().setVisible(true); 
+            dispose(); 
         });
 
         btnEditar.addActionListener(e -> editarClienteSeleccionado());
