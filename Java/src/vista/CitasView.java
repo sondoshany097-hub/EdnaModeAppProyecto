@@ -38,7 +38,7 @@ public class CitasView extends JFrame {
     }
 
     private void initComponents() {
-        Color darkGreen = new Color(85, 107, 47);
+    	Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
@@ -76,10 +76,10 @@ public class CitasView extends JFrame {
         styleButton(btnVolver, darkGreen, Color.WHITE);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
-        btnNuevo.setBounds(120, 470, 130, 40);
-        btnEditar.setBounds(280, 470, 130, 40);
-        btnBorrar.setBounds(440, 470, 130, 40);
-        btnVolver.setBounds(600, 470, 130, 40);
+        btnNuevo.setBounds(144, 469, 130, 40);
+        btnEditar.setBounds(298, 470, 130, 40);
+        btnBorrar.setBounds(458, 470, 130, 40);
+        btnVolver.setBounds(611, 469, 130, 40);
 
         getContentPane().add(btnNuevo);
         getContentPane().add(btnEditar);
@@ -169,7 +169,7 @@ public class CitasView extends JFrame {
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
-        button.setBackground(new Color(85, 107, 47));
+        button.setBackground(background);
         button.setOpaque(true);
         button.setContentAreaFilled(true);
         button.setBorderPainted(false);
