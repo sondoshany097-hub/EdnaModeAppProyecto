@@ -69,18 +69,17 @@ public class CitasView extends JFrame {
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar");
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBackground(new Color(85, 107, 47));
 
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, lightGray, textColor.white);
+        styleButton(btnVolver, darkGreen, Color.WHITE);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
-        btnNuevo.setBounds(170, 500, 130, 40);
-        btnEditar.setBounds(350, 500, 130, 40);
-        btnBorrar.setBounds(530, 500, 130, 40);
-        btnVolver.setBounds(710, 500, 130, 40);
+        btnNuevo.setBounds(120, 470, 130, 40);
+        btnEditar.setBounds(280, 470, 130, 40);
+        btnBorrar.setBounds(440, 470, 130, 40);
+        btnVolver.setBounds(600, 470, 130, 40);
 
         getContentPane().add(btnNuevo);
         getContentPane().add(btnEditar);
@@ -111,12 +110,12 @@ public class CitasView extends JFrame {
     }
 
     private void editarCitaSeleccionada() {
-        int row = tableCitas.getSelectedRow();
+    	int row = tableCitas.getSelectedRow();
 
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona una cita para editar.");
-            return;
-        }
+    	if (row == -1) {
+    	    JOptionPane.showMessageDialog(this, "Selecciona una cita.");
+    	    return;
+    	}
 
         int idCita = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
 

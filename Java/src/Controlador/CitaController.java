@@ -22,9 +22,8 @@ public class CitaController {
 		
 	}
 	
-	public boolean gurdarCita(Cita cita) {
-		return citaDAO.guardarCita(cita);
-		
+	public boolean guardarCita(Cita cita) {
+	    return citaDAO.guardarCita(cita);
 	}
 	
 	public List<String[]> listarCitasConNombres(){

@@ -71,7 +71,7 @@ public class ClienteDAO {
          */
 		
 		public boolean actualizarCliente(Cliente cliente) {
-			String sql = "UPDATE CLIENTES SET NOMBRE = ?, SUPERPODER = ?, COLORES = ?, TIPO = ? WHERE ID_CLIENTE = ?";
+			String sql = "UPDATE CLIENTES SET NOMBRE = ?, SUPERPODER = ?, COLORES = ?, TIPO = ? WHERE ID_CLIENTE = 0";
 				try (Connection con = ConexionBD.conectar();
 				PreparedStatement ps = con.prepareStatement(sql)){
 					ps.setString(1, cliente.getNombreHero());
@@ -95,7 +95,7 @@ public class ClienteDAO {
 		 */
 				
 		public boolean eliminarCliente(int idCliente) {
-			String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE";
+			String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE = ?";
 			try (Connection con = ConexionBD.conectar();
 					PreparedStatement ps = con.prepareStatement(sql)){
 				ps.setInt(1, idCliente);

@@ -74,10 +74,10 @@ public class ClientesView extends JFrame {
 
         JButton btnFiltrar = new JButton("Filtrar");
         styleButton(btnFiltrar, darkGreen, Color.WHITE);
-        btnFiltrar.setBounds(718, 82, 120, 32);
+        btnFiltrar.setBounds(590, 85, 120, 32);
         getContentPane().add(btnFiltrar);
 
-        String[] columns = {"Nombre", "Superpoder", "Colores", "Tipo"};
+        String[] columns = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -96,12 +96,11 @@ public class ClientesView extends JFrame {
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar");
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBackground(new Color(85, 107, 47));
 
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, darkGreen, textColor.WHITE);
+        styleButton(btnVolver, darkGreen, Color.WHITE);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnNuevo.setBounds(120, 470, 130, 40);
@@ -114,21 +113,26 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnBorrar);
         getContentPane().add(btnVolver);
         
-        JButton btnMasTrajes = new JButton("Trajes");
-        btnMasTrajes.setBackground(new Color(85, 107, 47));
-        btnMasTrajes.setBounds(600, 78, 120, 40);
-        styleButton(btnMasTrajes, darkGreen, textColor.WHITE);
-        btnMasTrajes.setBounds(590, 85, 120, 32);
-        getContentPane().add(btnMasTrajes);
+        JButton btnTrajes = new JButton("Trajes");
+        btnTrajes.setOpaque(true);
+        btnTrajes.setForeground(Color.WHITE);
+        btnTrajes.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btnTrajes.setFocusPainted(false);
+        btnTrajes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnTrajes.setContentAreaFilled(true);
+        btnTrajes.setBorderPainted(false);
+        btnTrajes.setBackground(new Color(85, 107, 47));
+        btnTrajes.setBounds(730, 85, 120, 32);
+        getContentPane().add(btnTrajes);
+        
+        btnTrajes.addActionListener(e -> { 
+        	new TrajesView().setVisible(true); dispose(); });
+        
+        
 
         btnNuevo.addActionListener(e -> {
             new ClienteFormView().setVisible(true);
             dispose();
-        });
-        
-        btnMasTrajes.addActionListener(e -> {
-            new TrajesView().setVisible(true); 
-            dispose(); 
         });
 
         btnEditar.addActionListener(e -> editarClienteSeleccionado());

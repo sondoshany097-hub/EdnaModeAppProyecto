@@ -33,7 +33,6 @@ public class ClienteConroller {
 		return clienteDAO.listarClientes();
 		
 	}
-	
 	public boolean actiualizarCliente(Cliente cliente) {
 		return clienteDAO.actualizarCliente(cliente);
 	}

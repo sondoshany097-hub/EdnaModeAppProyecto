@@ -2,6 +2,7 @@
  * 
  */
 package vista;
+
 import Controlador.TallerController;
 import Modelo.Taller;
 
@@ -45,6 +46,7 @@ public class TallerFormView extends JFrame {
     }
 
     private void initComponents() {
+
         Color darkGreen = new Color(85, 107, 47);
         Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
@@ -88,15 +90,13 @@ public class TallerFormView extends JFrame {
         JButton btnCancelar = new JButton("Cancelar");
 
         styleButton(btnGuardar, darkGreen, Color.WHITE);
-        styleButton(btnCancelar, darkGreen, textColor.WHITE);
-        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+        styleButton(btnCancelar, darkGreen, Color.WHITE);
 
         btnGuardar.setBounds(150, 350, 130, 42);
         btnCancelar.setBounds(320, 350, 130, 42);
 
         getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);
-
         btnGuardar.addActionListener(e -> guardarOActualizarTaller());
 
         btnCancelar.addActionListener(e -> {
@@ -112,15 +112,20 @@ public class TallerFormView extends JFrame {
     }
 
     private void guardarOActualizarTaller() {
-        String nombreSala = txtNombreSala.getText().trim();
-        String tipoSala = cbTipoSala.getSelectedItem().toString();
 
-        if (nombreSala.isEmpty()) {
+        String nombreSala = txtNombreSala.getText().trim();
+        String tipoSala = cbTipoSala.getSelectedItem() != null
+                ? cbTipoSala.getSelectedItem().toString()
+                : "";
+
+        if (nombreSala.isEmpty() || tipoSala.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Completa todos los campos.");
             return;
         }
 
         Taller taller = new Taller();
+
+        
         taller.setNombreSala(nombreSala);
         taller.setTipoSala(tipoSala);
 
@@ -138,7 +143,7 @@ public class TallerFormView extends JFrame {
             new TalleresView().setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Error en la operación.");
+            JOptionPane.showMessageDialog(this, "Error al guardar.");
         }
     }
 
@@ -147,7 +152,6 @@ public class TallerFormView extends JFrame {
         button.setForeground(foreground);
         button.setBackground(background);
         button.setOpaque(true);
-        button.setContentAreaFilled(true);
         button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));

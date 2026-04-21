@@ -88,6 +88,16 @@ public class CitaFormView extends JFrame {
             getContentPane().add(label);
             y += 55;
         }
+  
+        JLabel lblId = new JLabel("ID:");
+        lblId.setBounds(80, 70, 120, 25);
+        getContentPane().add(lblId);
+
+        txtId = new JTextField();
+        txtId.setBounds(240, 70, 280, 32);
+        txtId.setEditable(false);
+        txtId.setBackground(new Color(230,230,230));
+        getContentPane().add(txtId);
 
         cbCliente = new JComboBox<>();
         cbCliente.setBounds(240, 120, 280, 32);
@@ -218,7 +228,7 @@ public class CitaFormView extends JFrame {
         boolean resultado;
 
         if (citaEditar == null) {
-            resultado = citaController.gurdarCita(cita);
+            resultado = citaController.guardarCita(cita);
         } else {
             cita.setIdCita(citaEditar.getIdCita());
             resultado = citaController.actiualizarCita(cita);

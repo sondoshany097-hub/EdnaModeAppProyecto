@@ -11,7 +11,7 @@ import Modelo.*;
  */
 public class TallerDAO {
 	public boolean guardarTaller(Taller taller) {
-		String sql = "INSERT INTO TALLERS (NOMBRE_SALA, TIPO_SALA) VALUES (?,?)";
+		String sql = "INSERT INTO TALLERES (NOMBRE_SALA, TIPO_SALA) VALUES (?,?)";
 		try (Connection con = ConexionBD.conectar();
 	    PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setString(1, taller.getNombresala());
@@ -57,7 +57,7 @@ public class TallerDAO {
 	
 	
 	public boolean actualizarTaller(Taller taller) {
-		String sql = "UPDATE TALLER SET NOMBRE_SALA = ?, TIPO_SALA = ? WHERE ID_TALLER = ?";
+		String sql = "UPDATE TALLERES SET NOMBRE_SALA = ?, TIPO_SALA = ? WHERE ID_TALLER = ?";
 		
 		try (Connection con = ConexionBD.conectar();
 	             PreparedStatement ps = con.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class TallerDAO {
 	 * @return
 	 */
 	public boolean eliminarTaller(int idTaller) {
-        String sql = "DELETE FROM TALLER WHERE ID_TALLER = ?";
+		String sql = "DELETE FROM TALLERES WHERE ID_TALLER = ?";
 
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {

@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class CitaDAO {
 	public boolean guardarCita (Cita cita) {
-		String sql = "INSERT INTO CITA (ID_CLIENTE, ID_TRAJE, ID_TALLER, FECHA, HORA, DURACION) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO CITAS (ID_CLIENTE, ID_TRAJE, ID_TALLER, FECHA, HORA, DURACION) VALUES (?,?,?,?,?,?)";
 		try (Connection con = ConexionBD.conectar();
 		PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, cita.getIdCliente());
@@ -31,7 +31,7 @@ public class CitaDAO {
 		 * Cuando hay error me sale esta mensaje
 		 */
 		catch(SQLException e) {
-			System.out.println("Error en guardar cita");
+			e.printStackTrace();
 			return false;
 		}}
 		
@@ -91,7 +91,7 @@ public class CitaDAO {
 		 * Eliminar cita con ID
 		 */
 		public boolean eliminarCitas(int idCita) {
-			String sql = "DELETE FROM CITAS WHERE ID_CITA";
+			String sql = "DELETE FROM CITAS WHERE ID_CITA = ?";
 			try (Connection con = ConexionBD.conectar();
 					PreparedStatement ps = con.prepareStatement(sql)){
 				ps.setInt(1, idCita);
@@ -117,13 +117,13 @@ public class CitaDAO {
 		public List<String[]> listarCitasConNombres(){
 			 List<String[]> lista = new ArrayList<>();
 			 String sql =
-					 "SELECT c.ID_CITA, cl.NOMBRE AS CLIENTE, t.NOMBRE AS TRAJE," 
-					 + "ta.NOMBRE_SALA AS TALLER, c.FECHA, c.HORA, c.DURACION "
-					 + "FROM CITAS c " 
-					 + "INNER JOIN CLIENTES cl ON c.ID_CLIENTE = cl.ID_CLIENTE"
-					 + "INNER JOIN TRAJES t ON c.ID_TRAJE = t.ID_TRAJE"
-					 + "INNER JOIN TALLERES ta ON c.ID_TALLER = ta.ID_TALLER"
-					 + "ORDER BY c.ID_CITA";
+					    "SELECT c.ID_CITA, cl.NOMBRE AS CLIENTE, t.NOMBRE AS TRAJE, " +
+					    "ta.NOMBRE_SALA AS TALLER, c.FECHA, c.HORA, c.DURACION " +
+					    "FROM CITAS c " +
+					    "INNER JOIN CLIENTES cl ON c.ID_CLIENTE = cl.ID_CLIENTE " +
+					    "INNER JOIN TRAJES t ON c.ID_TRAJE = t.ID_TRAJE " +
+					    "INNER JOIN TALLERES ta ON c.ID_TALLER = ta.ID_TALLER " +
+					    "ORDER BY c.ID_CITA";
 		
 		try (Connection con = ConexionBD.conectar();
 	             PreparedStatement ps = con.prepareStatement(sql);
@@ -137,7 +137,7 @@ public class CitaDAO {
 	                fila[3] = rs.getString("TALLER");
 	                fila[4] = rs.getString("FECHA");
 	                fila[5] = rs.getString("HORA");
-	                fila[6] = String.valueOf(rs.getInt("Duracion"));
+	                fila[6] = String.valueOf(rs.getInt("DURACION"));
 	                lista.add(fila);
 	                }
 		} catch (SQLException e) {

@@ -80,7 +80,7 @@ public class Cita {
 	        return Duracion;
 	    }
 
-	    public void setDuracion(int Duracon) {
+	    public void setDuracion(int Duracion) {
 	        this.Duracion = Duracion;
 	    }
 	    

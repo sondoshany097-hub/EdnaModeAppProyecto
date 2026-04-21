@@ -1,6 +1,7 @@
 package vista;
 import Controlador.TallerController;
 import Modelo.Taller;
+import Modelo.Traje;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -14,6 +15,8 @@ public class TalleresView extends JFrame {
     private JTable tableTalleres;
     private DefaultTableModel tableModel;
     private TallerController tallerController;
+	private int idTaller;
+	private Traje taller;
 
     public TalleresView() {
         tallerController = new TallerController();
@@ -47,7 +50,7 @@ public class TalleresView extends JFrame {
         lblTitle.setBounds(30, 20, 320, 35);
         getContentPane().add(lblTitle);
 
-        String[] columns = {"ID", "Nombre Sala", "Tipo Sala"};
+        String[] columns = {"Nombre Sala", "Tipo Sala"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -70,7 +73,7 @@ public class TalleresView extends JFrame {
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
         styleButton(btnBorrar, darkRed, Color.WHITE);
-        styleButton(btnVolver, darkGreen, textColor.WHITE);
+        styleButton(btnVolver, darkGreen, Color.WHITE);
         btnVolver.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
         btnNuevo.setBounds(120, 470, 130, 40);
@@ -83,8 +86,11 @@ public class TalleresView extends JFrame {
         getContentPane().add(btnBorrar);
         getContentPane().add(btnVolver);
 
-        btnNuevo.addActionListener(e -> JOptionPane.showMessageDialog(this, "Formulario de taller aún no está implementado."));
-        btnEditar.addActionListener(e -> JOptionPane.showMessageDialog(this, "Editar taller aún no está implementado."));
+        btnNuevo.addActionListener(e -> {
+            new TallerFormView().setVisible(true);
+            dispose();
+        });
+        btnEditar.addActionListener(e -> editarTallerSeleccionado());
 
         btnBorrar.addActionListener(e -> borrarTallerSeleccionado());
 
@@ -93,18 +99,44 @@ public class TalleresView extends JFrame {
             dispose();
         });
     }
+    private void cargarTalleresDesdeBD(){
+    List<Taller> lista = tallerController.listarTaller();
 
-    private void cargarTalleresDesdeBD() {
-        tableModel.setRowCount(0);
+    for (Taller taller : lista) {
+        tableModel.addRow(new Object[]{
+            taller.getIdTaller(),
+            taller.getNombresala(),
+            taller.getTiposala()
+            
+        });
+    }
+    }
+
+    private void editarTallerSeleccionado() {
+        int row = tableTalleres.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona un traje para editar.");
+            return;
+        }
+
+        int idTaller = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
 
         List<Taller> lista = tallerController.listarTaller();
+        Taller tallerSeleccionado = null;
 
         for (Taller taller : lista) {
-            tableModel.addRow(new Object[]{
-                    taller.getIdTaller(),
-                    taller.getNombresala(),
-                    taller.getTiposala()
-            });
+            if (taller.getIdTaller() == idTaller) {
+                tallerSeleccionado = taller;
+                break;
+            }
+        }
+
+        if (tallerSeleccionado != null) {
+            new TallerFormView(tallerSeleccionado).setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo cargar el taller seleccionado.");
         }
     }
 
@@ -116,17 +148,17 @@ public class TalleresView extends JFrame {
             return;
         }
 
-        int idTaller = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+        int idTraje = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
 
         int confirm = JOptionPane.showConfirmDialog(
                 this,
-                "¿Seguro que deseas borrar este taller?",
+                "¿Seguro que deseas borrar este talleres?",
                 "Confirmar borrado",
                 JOptionPane.YES_NO_OPTION
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean eliminado = tallerController.eliminarTaller(idTaller);
+            boolean eliminado = tallerController.eliminarTaller(idTraje);
 
             if (eliminado) {
                 JOptionPane.showMessageDialog(this, "Taller borrado correctamente.");
