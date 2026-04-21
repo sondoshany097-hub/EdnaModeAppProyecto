@@ -71,7 +71,7 @@ public class ClienteDAO {
          */
 		
 		public boolean actualizarCliente(Cliente cliente) {
-			String sql = "UPDATE CLIENTES SET NOMBRE = ?, SUPERPODER = ?, COLORES = ?, TIPO = ? WHERE ID_CLIENTE = 0";
+			String sql = "UPDATE CLIENTES SET NOMBRE = ?, SUPERPODER = ?, COLORES = ?, TIPO = ? WHERE ID_CLIENTE = ?";
 				try (Connection con = ConexionBD.conectar();
 				PreparedStatement ps = con.prepareStatement(sql)){
 					ps.setString(1, cliente.getNombreHero());
