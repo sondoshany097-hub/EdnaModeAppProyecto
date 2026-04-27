@@ -1,7 +1,5 @@
-/**
- * Vista para la gestión de citas
- */
 package vista;
+
 import Controlador.CitaController;
 import Modelo.Cita;
 
@@ -9,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.List;
 
@@ -38,10 +37,8 @@ public class CitasView extends JFrame {
     }
 
     private void initComponents() {
-    	Color darkGreen = new Color(85, 107, 47);
+        Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
-        Color lightGray = new Color(245, 245, 245);
-        Color textColor = new Color(40, 40, 40);
         Color darkRed = new Color(140, 40, 40);
 
         JLabel lblTitle = new JLabel("Gestión de Citas");
@@ -50,7 +47,7 @@ public class CitasView extends JFrame {
         lblTitle.setBounds(30, 20, 320, 35);
         getContentPane().add(lblTitle);
 
-        String[] columns = {"Cliente", "Traje", "Taller", "Fecha", "Hora", "Duración"};
+        String[] columns = {"ID", "Cliente", "Traje", "Taller", "Fecha", "Hora", "Duración"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -60,6 +57,7 @@ public class CitasView extends JFrame {
 
         tableCitas = new JTable(tableModel);
         styleTable(tableCitas);
+        ocultarColumnaId();
 
         JScrollPane scrollPane = new JScrollPane(tableCitas);
         scrollPane.setBounds(30, 100, 920, 320);
@@ -100,22 +98,34 @@ public class CitasView extends JFrame {
         });
     }
 
+    private void ocultarColumnaId() {
+        TableColumn columnaId = tableCitas.getColumnModel().getColumn(0);
+        columnaId.setMinWidth(0);
+        columnaId.setMaxWidth(0);
+        columnaId.setPreferredWidth(0);
+    }
+
     private void cargarCitasDesdeBD() {
         tableModel.setRowCount(0);
+
+        // نفترض أن هذا الميثود يرجع:
+        // [id, cliente, traje, taller, fecha, hora, duracion]
         List<String[]> lista = citaController.listarCitasConNombres();
 
         for (String[] fila : lista) {
-            tableModel.addRow(fila);
+            if (fila.length == 7) {
+                tableModel.addRow(fila);
+            }
         }
     }
 
     private void editarCitaSeleccionada() {
-    	int row = tableCitas.getSelectedRow();
+        int row = tableCitas.getSelectedRow();
 
-    	if (row == -1) {
-    	    JOptionPane.showMessageDialog(this, "Selecciona una cita.");
-    	    return;
-    	}
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una cita.");
+            return;
+        }
 
         int idCita = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
 
@@ -137,7 +147,7 @@ public class CitasView extends JFrame {
         }
     }
 
-   private void borrarCitaSeleccionada() {
+    private void borrarCitaSeleccionada() {
         int row = tableCitas.getSelectedRow();
 
         if (row == -1) {
@@ -155,14 +165,14 @@ public class CitasView extends JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-          boolean eliminado = citaController.eliminarCita(idCita);
+            boolean eliminado = citaController.eliminarCita(idCita);
 
             if (eliminado) {
                 JOptionPane.showMessageDialog(this, "Cita borrada correctamente.");
                 cargarCitasDesdeBD();
             } else {
-              JOptionPane.showMessageDialog(this, "Error al borrar cita.");
-           }
+                JOptionPane.showMessageDialog(this, "Error al borrar cita.");
+            }
         }
     }
 

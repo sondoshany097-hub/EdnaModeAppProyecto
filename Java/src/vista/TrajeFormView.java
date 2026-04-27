@@ -1,4 +1,5 @@
 package vista;
+
 import Controlador.ClienteConroller;
 import Controlador.TrajeController;
 import Modelo.Cliente;
@@ -11,7 +12,6 @@ import java.util.List;
 
 public class TrajeFormView extends JFrame {
 
-    private JTextField txtId;
     private JComboBox<ItemCombo> cbCliente;
     private JTextField txtNombre;
     private JComboBox<String> cbEstado;
@@ -19,13 +19,23 @@ public class TrajeFormView extends JFrame {
     private Traje trajeEditar;
     private TrajeController trajeController;
     private ClienteConroller clienteController;
+    private CitaFormView citaFormPadre;
 
     public TrajeFormView() {
-        this(null);
+        this(null, null);
     }
 
     public TrajeFormView(Traje traje) {
+        this(traje, null);
+    }
+
+    public TrajeFormView(CitaFormView citaFormPadre) {
+        this(null, citaFormPadre);
+    }
+
+    public TrajeFormView(Traje traje, CitaFormView citaFormPadre) {
         this.trajeEditar = traje;
+        this.citaFormPadre = citaFormPadre;
         this.trajeController = new TrajeController();
         this.clienteController = new ClienteConroller();
 
@@ -51,7 +61,6 @@ public class TrajeFormView extends JFrame {
 
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
-        Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
         JLabel lblTitle = new JLabel("Formulario de Traje");
@@ -60,12 +69,11 @@ public class TrajeFormView extends JFrame {
         lblTitle.setBounds(170, 25, 320, 35);
         getContentPane().add(lblTitle);
 
-        JLabel lblId = new JLabel("ID:");
         JLabel lblCliente = new JLabel("Cliente:");
-        JLabel lblNombre = new JLabel("Nombre:");
-        JLabel lblEstado = new JLabel("Estado:");
+        JLabel lblNombre = new JLabel("Nombre de Traje:");
+        JLabel lblEstado = new JLabel("Estado de Traje:");
 
-        JLabel[] labels = {lblId, lblCliente, lblNombre, lblEstado};
+        JLabel[] labels = {lblCliente, lblNombre, lblEstado};
 
         int y = 100;
         for (JLabel label : labels) {
@@ -76,22 +84,16 @@ public class TrajeFormView extends JFrame {
             y += 65;
         }
 
-        txtId = new JTextField("Auto-generated");
-        txtId.setBounds(220, 100, 280, 32);
-        txtId.setEditable(false);
-        txtId.setBackground(new Color(235, 235, 235));
-        getContentPane().add(txtId);
-
         cbCliente = new JComboBox<>();
-        cbCliente.setBounds(220, 165, 280, 32);
+        cbCliente.setBounds(210, 100, 280, 32);
         getContentPane().add(cbCliente);
 
         txtNombre = new JTextField();
-        txtNombre.setBounds(220, 230, 280, 32);
+        txtNombre.setBounds(210, 165, 280, 32);
         getContentPane().add(txtNombre);
 
         cbEstado = new JComboBox<>(new String[]{"Diseño", "Costura", "Taller"});
-        cbEstado.setBounds(220, 295, 280, 32);
+        cbEstado.setBounds(210, 230, 280, 32);
         getContentPane().add(cbEstado);
 
         JButton btnGuardar = new JButton("Guardar");
@@ -108,11 +110,7 @@ public class TrajeFormView extends JFrame {
         getContentPane().add(btnCancelar);
 
         btnGuardar.addActionListener(e -> guardarOActualizarTraje());
-
-        btnCancelar.addActionListener(e -> {
-            new TrajesView().setVisible(true);
-            dispose();
-        });
+        btnCancelar.addActionListener(e -> volverPantallaAnterior());
     }
 
     private void cargarClientes() {
@@ -125,7 +123,6 @@ public class TrajeFormView extends JFrame {
     }
 
     private void cargarDatosTraje() {
-        txtId.setText(String.valueOf(trajeEditar.getIdTraje()));
         txtNombre.setText(trajeEditar.getNombreTraje() == null ? "" : trajeEditar.getNombreTraje());
         cbEstado.setSelectedItem(trajeEditar.getEstado());
         seleccionarCliente(trajeEditar.getIdCliente());
@@ -167,11 +164,20 @@ public class TrajeFormView extends JFrame {
 
         if (resultado) {
             JOptionPane.showMessageDialog(this, "Operación realizada correctamente.");
-            new TrajesView().setVisible(true);
-            dispose();
+            volverPantallaAnterior();
         } else {
             JOptionPane.showMessageDialog(this, "Error en la operación.");
         }
+    }
+
+    private void volverPantallaAnterior() {
+        if (citaFormPadre != null) {
+            citaFormPadre.recargarCombos();
+            citaFormPadre.setVisible(true);
+        } else {
+            new TrajesView().setVisible(true);
+        }
+        dispose();
     }
 
     private void styleButton(JButton button, Color background, Color foreground) {

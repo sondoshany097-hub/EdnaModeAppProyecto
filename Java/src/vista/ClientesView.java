@@ -1,4 +1,5 @@
 package vista;
+
 import Controlador.ClienteConroller;
 import Modelo.Cliente;
 
@@ -9,10 +10,7 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
 
-/**
- * View for displaying all clients.
- * No mock data is used. Data comes from MySQL.
- */
+
 public class ClientesView extends JFrame {
 
     private JTable tableClientes;
@@ -44,8 +42,6 @@ public class ClientesView extends JFrame {
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
-        Color lightGray = new Color(245, 245, 245);
-        Color textColor = new Color(40, 40, 40);
         Color darkRed = new Color(140, 40, 40);
 
         JLabel lblTitle = new JLabel("Gestión de Clientes");
@@ -77,6 +73,7 @@ public class ClientesView extends JFrame {
         btnFiltrar.setBounds(590, 85, 120, 32);
         getContentPane().add(btnFiltrar);
 
+        
         String[] columns = {"ID", "Nombre", "Superpoder", "Colores", "Tipo"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
@@ -87,6 +84,12 @@ public class ClientesView extends JFrame {
 
         tableClientes = new JTable(tableModel);
         styleTable(tableClientes);
+
+        
+        tableClientes.getColumnModel().getColumn(0).setMinWidth(0);
+        tableClientes.getColumnModel().getColumn(0).setMaxWidth(0);
+        tableClientes.getColumnModel().getColumn(0).setWidth(0);
+        tableClientes.getColumnModel().getColumn(0).setPreferredWidth(0);
 
         JScrollPane scrollPane = new JScrollPane(tableClientes);
         scrollPane.setBounds(30, 140, 820, 280);
@@ -112,23 +115,16 @@ public class ClientesView extends JFrame {
         getContentPane().add(btnEditar);
         getContentPane().add(btnBorrar);
         getContentPane().add(btnVolver);
-        
+
         JButton btnTrajes = new JButton("Trajes");
-        btnTrajes.setOpaque(true);
-        btnTrajes.setForeground(Color.WHITE);
-        btnTrajes.setFont(new Font("SansSerif", Font.BOLD, 16));
-        btnTrajes.setFocusPainted(false);
-        btnTrajes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnTrajes.setContentAreaFilled(true);
-        btnTrajes.setBorderPainted(false);
-        btnTrajes.setBackground(new Color(85, 107, 47));
+        styleButton(btnTrajes, darkGreen, Color.WHITE);
         btnTrajes.setBounds(730, 85, 120, 32);
         getContentPane().add(btnTrajes);
-        
-        btnTrajes.addActionListener(e -> { 
-        	new TrajesView().setVisible(true); dispose(); });
-        
-        
+
+        btnTrajes.addActionListener(e -> {
+            new TrajesView().setVisible(true);
+            dispose();
+        });
 
         btnNuevo.addActionListener(e -> {
             new ClienteFormView().setVisible(true);
@@ -136,7 +132,6 @@ public class ClientesView extends JFrame {
         });
 
         btnEditar.addActionListener(e -> editarClienteSeleccionado());
-
         btnBorrar.addActionListener(e -> borrarClienteSeleccionado());
 
         btnVolver.addActionListener(e -> {
@@ -172,10 +167,10 @@ public class ClientesView extends JFrame {
         List<Cliente> lista = clienteController.listarClientes();
 
         for (Cliente cliente : lista) {
-            String nombre = cliente.getNombreHero().toLowerCase();
+            String nombre = cliente.getNombreHero() == null ? "" : cliente.getNombreHero().toLowerCase();
             String poder = cliente.getSuperpoder() == null ? "" : cliente.getSuperpoder().toLowerCase();
             String colores = cliente.getColores() == null ? "" : cliente.getColores().toLowerCase();
-            String tipo = cliente.getTipoPersonaje();
+            String tipo = cliente.getTipoPersonaje() == null ? "" : cliente.getTipoPersonaje();
 
             boolean coincideTexto = nombre.contains(texto) || poder.contains(texto) || colores.contains(texto);
             boolean coincideTipo = tipoSeleccionado.equals("Todos") || tipo.equals(tipoSeleccionado);

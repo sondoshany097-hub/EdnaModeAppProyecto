@@ -1,4 +1,5 @@
 package vista;
+
 import Controlador.CitaController;
 import Controlador.ClienteConroller;
 import Controlador.TallerController;
@@ -11,11 +12,14 @@ import Modelo.Traje;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class CitaFormView extends JFrame {
 
-    private JTextField txtId;
     private JComboBox<ItemCombo> cbCliente;
     private JComboBox<ItemCombo> cbTraje;
     private JComboBox<ItemCombo> cbTaller;
@@ -65,13 +69,13 @@ public class CitaFormView extends JFrame {
 
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
-        Color lightGray = new Color(245, 245, 245);
 
         JLabel lblTitle = new JLabel("Formulario de Cita");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(200, 30, 320, 35);
+        lblTitle.setBounds(30, 24, 280, 35);
         getContentPane().add(lblTitle);
+
         JLabel lblCliente = new JLabel("Cliente:");
         JLabel lblTraje = new JLabel("Traje:");
         JLabel lblTaller = new JLabel("Taller:");
@@ -81,48 +85,48 @@ public class CitaFormView extends JFrame {
 
         JLabel[] labels = {lblCliente, lblTraje, lblTaller, lblFecha, lblHora, lblDuracion};
 
-        int y = 100;
+        int y = 110;
         for (JLabel label : labels) {
             label.setFont(new Font("SansSerif", Font.BOLD, 16));
-            label.setBounds(80, y, 140, 25);
+            label.setBounds(80, y, 120, 30);
             getContentPane().add(label);
-            y += 55;
+            y += 60;
         }
-  
-        JLabel lblId = new JLabel("ID:");
-        lblId.setBounds(80, 70, 120, 25);
-        getContentPane().add(lblId);
-
-        txtId = new JTextField();
-        txtId.setBounds(240, 70, 280, 32);
-        txtId.setEditable(false);
-        txtId.setBackground(new Color(230,230,230));
-        getContentPane().add(txtId);
 
         cbCliente = new JComboBox<>();
-        cbCliente.setBounds(240, 120, 280, 32);
+        cbCliente.setBounds(220, 110, 280, 32);
         getContentPane().add(cbCliente);
 
+        JButton btnAñadirCliente = new JButton("Añadir Cliente");
+        btnAñadirCliente.setBounds(360, 30, 150, 32);
+        styleButton(btnAñadirCliente, darkGreen, Color.WHITE);
+        getContentPane().add(btnAñadirCliente);
+
         cbTraje = new JComboBox<>();
-        cbTraje.setBounds(240, 180, 280, 32);
+        cbTraje.setBounds(220, 170, 280, 32);
         getContentPane().add(cbTraje);
 
+        JButton btnAñadirTraje = new JButton("Añadir Traje");
+        btnAñadirTraje.setBounds(522, 30, 150, 32);
+        styleButton(btnAñadirTraje, darkGreen, Color.WHITE);
+        getContentPane().add(btnAñadirTraje);
+
         cbTaller = new JComboBox<>();
-        cbTaller.setBounds(240, 240, 280, 32);
+        cbTaller.setBounds(220, 230, 280, 32);
         getContentPane().add(cbTaller);
 
         txtFecha = new JTextField();
-        txtFecha.setBounds(240, 300, 280, 32);
+        txtFecha.setBounds(220, 290, 280, 32);
         txtFecha.setToolTipText("YYYY-MM-DD");
         getContentPane().add(txtFecha);
 
         txtHora = new JTextField();
-        txtHora.setBounds(240, 360, 280, 32);
+        txtHora.setBounds(220, 350, 280, 32);
         txtHora.setToolTipText("HH:MM");
         getContentPane().add(txtHora);
 
         txtDuracion = new JTextField("1");
-        txtDuracion.setBounds(240, 420, 280, 32);
+        txtDuracion.setBounds(220, 410, 280, 32);
         getContentPane().add(txtDuracion);
 
         JButton btnGuardar = new JButton("Guardar");
@@ -138,12 +142,43 @@ public class CitaFormView extends JFrame {
         getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);
 
+        btnAñadirCliente.addActionListener(e -> abrirFormularioCliente());
+        btnAñadirTraje.addActionListener(e -> abrirFormularioTraje());
+
         btnGuardar.addActionListener(e -> guardarOActualizarCita());
 
         btnCancelar.addActionListener(e -> {
             new CitasView().setVisible(true);
             dispose();
         });
+    }
+
+    private void abrirFormularioCliente() {
+        setVisible(false);
+        new ClienteFormView(this).setVisible(true);
+    }
+
+    private void abrirFormularioTraje() {
+        setVisible(false);
+        new TrajeFormView(this).setVisible(true);
+    }
+
+    public void recargarCombos() {
+        ItemCombo clienteSeleccionado = (ItemCombo) cbCliente.getSelectedItem();
+        ItemCombo trajeSeleccionado = (ItemCombo) cbTraje.getSelectedItem();
+        ItemCombo tallerSeleccionado = (ItemCombo) cbTaller.getSelectedItem();
+
+        Integer idCliente = clienteSeleccionado != null ? clienteSeleccionado.getId() : null;
+        Integer idTraje = trajeSeleccionado != null ? trajeSeleccionado.getId() : null;
+        Integer idTaller = tallerSeleccionado != null ? tallerSeleccionado.getId() : null;
+
+        cargarClientes();
+        cargarTrajes();
+        cargarTalleres();
+
+        if (idCliente != null) seleccionarCombo(cbCliente, idCliente);
+        if (idTraje != null) seleccionarCombo(cbTraje, idTraje);
+        if (idTaller != null) seleccionarCombo(cbTaller, idTaller);
     }
 
     private void cargarClientes() {
@@ -174,7 +209,6 @@ public class CitaFormView extends JFrame {
     }
 
     private void cargarDatosCita() {
-        txtId.setText(String.valueOf(citaEditar.getIdCita()));
         txtFecha.setText(citaEditar.getFecha());
         txtHora.setText(citaEditar.getHora());
         txtDuracion.setText(String.valueOf(citaEditar.getDuracion()));
@@ -212,8 +246,36 @@ public class CitaFormView extends JFrame {
         int duracion;
         try {
             duracion = Integer.parseInt(duracionTexto);
+            if (duracion <= 0) {
+                JOptionPane.showMessageDialog(this, "La duración debe ser mayor que 0.");
+                return;
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "La duración debe ser un número.");
+            return;
+        }
+
+        LocalDate fechaCita;
+        LocalTime horaCita;
+
+        try {
+            fechaCita = LocalDate.parse(fecha);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "La fecha debe tener formato YYYY-MM-DD.");
+            return;
+        }
+
+        try {
+            horaCita = LocalTime.parse(hora);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "La hora debe tener formato HH:MM.");
+            return;
+        }
+
+        LocalDateTime fechaHoraCita = LocalDateTime.of(fechaCita, horaCita);
+
+        if (fechaHoraCita.isBefore(LocalDateTime.now())) {
+            JOptionPane.showMessageDialog(this, "No se pueden crear citas en el pasado.");
             return;
         }
 
@@ -244,7 +306,7 @@ public class CitaFormView extends JFrame {
     }
 
     private void styleButton(JButton button, Color background, Color foreground) {
-        button.setFont(new Font("SansSerif", Font.BOLD, 16));
+        button.setFont(new Font("SansSerif", Font.BOLD, 13));
         button.setForeground(foreground);
         button.setBackground(background);
         button.setOpaque(true);

@@ -1,4 +1,5 @@
 package vista;
+
 import Controlador.ClienteConroller;
 import Modelo.Cliente;
 
@@ -7,7 +8,6 @@ import java.awt.*;
 
 public class ClienteFormView extends JFrame {
 
-    private JTextField txtId;
     private JTextField txtNombre;
     private JTextField txtSuperpoder;
     private JTextField txtColores;
@@ -16,15 +16,27 @@ public class ClienteFormView extends JFrame {
     private Cliente clienteEditar;
     private ClienteConroller clienteController;
 
+    // إذا انفتح من cita form
+    private CitaFormView citaFormPadre;
+
     public ClienteFormView() {
-        this(null);
+        this(null, null);
     }
 
     public ClienteFormView(Cliente cliente) {
+        this(cliente, null);
+    }
+
+    public ClienteFormView(CitaFormView citaFormPadre) {
+        this(null, citaFormPadre);
+    }
+
+    public ClienteFormView(Cliente cliente, CitaFormView citaFormPadre) {
         this.clienteEditar = cliente;
+        this.citaFormPadre = citaFormPadre;
         this.clienteController = new ClienteConroller();
 
-        setTitle("Edna Moda - Formulario de Cliente");
+        setTitle(clienteEditar == null ? "Edna Moda - Nuevo Cliente" : "Edna Moda - Editar Cliente");
         setSize(650, 520);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,22 +57,20 @@ public class ClienteFormView extends JFrame {
 
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
-        Color lightGray = new Color(245, 245, 245);
         Color textColor = new Color(40, 40, 40);
 
         JLabel lblTitle = new JLabel("Formulario de Cliente");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(170, 25, 320, 35);
+        lblTitle.setBounds(170, 29, 320, 35);
         getContentPane().add(lblTitle);
 
-        JLabel lblId = new JLabel("ID:");
         JLabel lblNombre = new JLabel("Nombre:");
         JLabel lblSuperpoder = new JLabel("Superpoder:");
         JLabel lblColores = new JLabel("Colores:");
         JLabel lblTipo = new JLabel("Tipo:");
 
-        JLabel[] labels = {lblId, lblNombre, lblSuperpoder, lblColores, lblTipo};
+        JLabel[] labels = {lblNombre, lblSuperpoder, lblColores, lblTipo};
 
         int y = 95;
         for (JLabel label : labels) {
@@ -71,26 +81,20 @@ public class ClienteFormView extends JFrame {
             y += 60;
         }
 
-        txtId = new JTextField("Auto-generated");
-        txtId.setBounds(230, 95, 280, 32);
-        txtId.setEditable(false);
-        txtId.setBackground(new Color(235, 235, 235));
-        getContentPane().add(txtId);
-
         txtNombre = new JTextField();
-        txtNombre.setBounds(230, 155, 280, 32);
+        txtNombre.setBounds(214, 89, 280, 32);
         getContentPane().add(txtNombre);
 
         txtSuperpoder = new JTextField();
-        txtSuperpoder.setBounds(230, 215, 280, 32);
+        txtSuperpoder.setBounds(214, 152, 280, 32);
         getContentPane().add(txtSuperpoder);
 
         txtColores = new JTextField();
-        txtColores.setBounds(230, 275, 280, 32);
+        txtColores.setBounds(214, 208, 280, 32);
         getContentPane().add(txtColores);
 
         cbTipo = new JComboBox<>(new String[]{"HEROE", "VILLANO"});
-        cbTipo.setBounds(230, 335, 280, 32);
+        cbTipo.setBounds(214, 270, 280, 32);
         getContentPane().add(cbTipo);
 
         JButton btnGuardar = new JButton("Guardar");
@@ -107,15 +111,10 @@ public class ClienteFormView extends JFrame {
         getContentPane().add(btnCancelar);
 
         btnGuardar.addActionListener(e -> guardarOActualizarCliente());
-
-        btnCancelar.addActionListener(e -> {
-            new ClientesView().setVisible(true);
-            dispose();
-        });
+        btnCancelar.addActionListener(e -> volverPantallaAnterior());
     }
 
     private void cargarDatosCliente() {
-        txtId.setText(String.valueOf(clienteEditar.getIdCliente()));
         txtNombre.setText(clienteEditar.getNombreHero() == null ? "" : clienteEditar.getNombreHero());
         txtSuperpoder.setText(clienteEditar.getSuperpoder() == null ? "" : clienteEditar.getSuperpoder());
         txtColores.setText(clienteEditar.getColores() == null ? "" : clienteEditar.getColores());
@@ -150,11 +149,20 @@ public class ClienteFormView extends JFrame {
 
         if (resultado) {
             JOptionPane.showMessageDialog(this, "Operación realizada correctamente.");
-            new ClientesView().setVisible(true);
-            dispose();
+            volverPantallaAnterior();
         } else {
             JOptionPane.showMessageDialog(this, "Error en la operación.");
         }
+    }
+
+    private void volverPantallaAnterior() {
+        if (citaFormPadre != null) {
+            citaFormPadre.recargarCombos();
+            citaFormPadre.setVisible(true);
+        } else {
+            new ClientesView().setVisible(true);
+        }
+        dispose();
     }
 
     private void styleButton(JButton button, Color background, Color foreground) {

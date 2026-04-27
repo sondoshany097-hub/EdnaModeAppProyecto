@@ -1,7 +1,7 @@
 package vista;
+
 import Controlador.TallerController;
 import Modelo.Taller;
-import Modelo.Traje;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -10,13 +10,13 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
 
+
 public class TalleresView extends JFrame {
 
     private JTable tableTalleres;
     private DefaultTableModel tableModel;
     private TallerController tallerController;
-	private int idTaller;
-	private Traje taller;
+    private List<Taller> listaTalleres;
 
     public TalleresView() {
         tallerController = new TallerController();
@@ -40,8 +40,6 @@ public class TalleresView extends JFrame {
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
-        Color lightGray = new Color(245, 245, 245);
-        Color textColor = new Color(40, 40, 40);
         Color darkRed = new Color(140, 40, 40);
 
         JLabel lblTitle = new JLabel("Gestión de Talleres");
@@ -90,8 +88,8 @@ public class TalleresView extends JFrame {
             new TallerFormView().setVisible(true);
             dispose();
         });
-        btnEditar.addActionListener(e -> editarTallerSeleccionado());
 
+        btnEditar.addActionListener(e -> editarTallerSeleccionado());
         btnBorrar.addActionListener(e -> borrarTallerSeleccionado());
 
         btnVolver.addActionListener(e -> {
@@ -99,47 +97,34 @@ public class TalleresView extends JFrame {
             dispose();
         });
     }
-    private void cargarTalleresDesdeBD(){
-    List<Taller> lista = tallerController.listarTaller();
 
-    for (Taller taller : lista) {
-        tableModel.addRow(new Object[]{
-            taller.getIdTaller(),
-            taller.getNombresala(),
-            taller.getTiposala()
-            
-        });
-    }
+    private void cargarTalleresDesdeBD() {
+        tableModel.setRowCount(0);
+
+        listaTalleres = tallerController.listarTaller();
+
+        for (Taller taller : listaTalleres) {
+            tableModel.addRow(new Object[]{
+                    taller.getNombresala(),
+                    taller.getTiposala()
+            });
+        }
     }
 
     private void editarTallerSeleccionado() {
         int row = tableTalleres.getSelectedRow();
 
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Selecciona un traje para editar.");
+            JOptionPane.showMessageDialog(this, "Selecciona un taller para editar.");
             return;
         }
 
-        int idTaller = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+        Taller tallerSeleccionado = listaTalleres.get(row);
 
-        List<Taller> lista = tallerController.listarTaller();
-        Taller tallerSeleccionado = null;
-
-        for (Taller taller : lista) {
-            if (taller.getIdTaller() == idTaller) {
-                tallerSeleccionado = taller;
-                break;
-            }
-        }
-
-        if (tallerSeleccionado != null) {
-            new TallerFormView(tallerSeleccionado).setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo cargar el taller seleccionado.");
-        }
+        new TallerFormView(tallerSeleccionado).setVisible(true);
+        dispose();
     }
-
+    
     private void borrarTallerSeleccionado() {
         int row = tableTalleres.getSelectedRow();
 
@@ -148,17 +133,18 @@ public class TalleresView extends JFrame {
             return;
         }
 
-        int idTraje = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+        Taller tallerSeleccionado = listaTalleres.get(row);
+        int idTaller = tallerSeleccionado.getIdTaller();
 
         int confirm = JOptionPane.showConfirmDialog(
                 this,
-                "¿Seguro que deseas borrar este talleres?",
+                "¿Seguro que deseas borrar este taller?",
                 "Confirmar borrado",
                 JOptionPane.YES_NO_OPTION
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean eliminado = tallerController.eliminarTaller(idTraje);
+            boolean eliminado = tallerController.eliminarTaller(idTaller);
 
             if (eliminado) {
                 JOptionPane.showMessageDialog(this, "Taller borrado correctamente.");

@@ -99,9 +99,9 @@ INSERT INTO TRAJES (ID_CLIENTE, NOMBRE, ESTADO) VALUES
 -- INSERTAR TALLERES --
 
 INSERT INTO TALLERES (NOMBRE_SALA, TIPO_SALA) VALUES
-('Milán', 'DISEÑO'),
-('París', 'COSTURA'),
-('Madrid', 'PRUEBAS');
+('Milán', 'Diseño'),
+('París', 'Costura'),
+('Madrid', 'Pruebas');
 
 
 -- INSERTAR CITAS --

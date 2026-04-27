@@ -1,4 +1,5 @@
 package vista;
+
 import Controlador.TrajeController;
 import Modelo.Traje;
 
@@ -37,8 +38,6 @@ public class TrajesView extends JFrame {
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
-        Color lightGray = new Color(245, 245, 245);
-        Color textColor = new Color(40, 40, 40);
         Color darkRed = new Color(140, 40, 40);
 
         JLabel lblTitle = new JLabel("Gestión de Trajes");
@@ -47,7 +46,7 @@ public class TrajesView extends JFrame {
         lblTitle.setBounds(30, 20, 320, 35);
         getContentPane().add(lblTitle);
 
-        String[] columns = {"Cliente", "Traje", "Estado"};
+        String[] columns = {"ID", "Cliente", "Nombre de Traje ", "Estado de Traje"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -58,6 +57,12 @@ public class TrajesView extends JFrame {
         tableTrajes = new JTable(tableModel);
         styleTable(tableTrajes);
 
+        // Hide ID column visually
+        tableTrajes.getColumnModel().getColumn(0).setMinWidth(0);
+        tableTrajes.getColumnModel().getColumn(0).setMaxWidth(0);
+        tableTrajes.getColumnModel().getColumn(0).setWidth(0);
+        tableTrajes.getColumnModel().getColumn(0).setPreferredWidth(0);
+
         JScrollPane scrollPane = new JScrollPane(tableTrajes);
         scrollPane.setBounds(30, 100, 1020, 380);
         getContentPane().add(scrollPane);
@@ -66,7 +71,6 @@ public class TrajesView extends JFrame {
         JButton btnEditar = new JButton("Editar");
         JButton btnBorrar = new JButton("Borrar");
         JButton btnVolver = new JButton("Volver");
-        btnVolver.setBackground(new Color(85, 107, 47));
 
         styleButton(btnNuevo, darkGreen, Color.WHITE);
         styleButton(btnEditar, gold, Color.WHITE);
@@ -90,7 +94,6 @@ public class TrajesView extends JFrame {
         });
 
         btnEditar.addActionListener(e -> editarTrajeSeleccionado());
-
         btnBorrar.addActionListener(e -> borrarTrajeSeleccionado());
 
         btnVolver.addActionListener(e -> {
@@ -105,7 +108,12 @@ public class TrajesView extends JFrame {
         List<String[]> lista = trajeController.listarTrajeConCliente();
 
         for (String[] fila : lista) {
-            tableModel.addRow(fila);
+            tableModel.addRow(new Object[]{
+                    fila[0],
+                    fila[1],
+                    fila[2],
+                    fila[3]
+            });
         }
     }
 
