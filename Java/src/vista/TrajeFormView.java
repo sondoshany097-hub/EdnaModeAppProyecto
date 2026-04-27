@@ -79,21 +79,21 @@ public class TrajeFormView extends JFrame {
         for (JLabel label : labels) {
             label.setFont(new Font("SansSerif", Font.BOLD, 16));
             label.setForeground(textColor);
-            label.setBounds(80, y, 120, 25);
+            label.setBounds(80, y, 220, 25);
             getContentPane().add(label);
             y += 65;
         }
 
         cbCliente = new JComboBox<>();
-        cbCliente.setBounds(210, 100, 280, 32);
+        cbCliente.setBounds(230, 100, 280, 32);
         getContentPane().add(cbCliente);
 
         txtNombre = new JTextField();
-        txtNombre.setBounds(210, 165, 280, 32);
+        txtNombre.setBounds(230, 165, 280, 32);
         getContentPane().add(txtNombre);
 
         cbEstado = new JComboBox<>(new String[]{"Diseño", "Costura", "Taller"});
-        cbEstado.setBounds(210, 230, 280, 32);
+        cbEstado.setBounds(230, 228, 280, 32);
         getContentPane().add(cbEstado);
 
         JButton btnGuardar = new JButton("Guardar");
