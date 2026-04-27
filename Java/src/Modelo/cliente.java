@@ -4,21 +4,31 @@
 package Modelo;
 
 /**
- * difinar los clses y su atribute.
+ * Clase que representa una cita.
+ * Define los atributos y métodos (getters/setters) necesarios.
  */
 public class Cliente {
-	
 	private int IdCliente;
 	private String NombreHero;
 	private String Superpoder;
 	private String Colores;
 	private String TipoPersonaje;
-		
+	
+	/**
+	  * Constructor vacío
+	  */
 	public Cliente () {
-		
 		
 	}
 
+	/**
+	 * Constructor con parámetros
+	 * @param IdCliente
+	 * @param NombreHero
+	 * @param Superpoder
+	 * @param Colores
+	 * @param TipoPersonaje
+	 */
 	public Cliente (int IdCliente, String NombreHero, String Superpoder, String Colores, String TipoPersonaje) {
 		this.IdCliente = IdCliente;
 		this.NombreHero = NombreHero;

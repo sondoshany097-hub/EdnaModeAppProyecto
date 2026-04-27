@@ -4,18 +4,27 @@
 package Modelo;
 
 /**
- * difinar los clses y su atribute.
+ * Clase que representa un taller o sala.
+ * Define sus atributos y métodos de acceso (getters y setters).
  */
 public class Taller {
 	private int IdTaller;
 	private String NombreSala;
 	private String TipoSala;
 
-
+	/**
+     * Constructor vacío
+     */
 	public Taller() {
 		
 	}
-
+	
+	/**
+     * Constructor con parámetros
+     * @param IdTaller
+     * @param NombreSala
+     * @param TipoSala
+     */
 	public Taller (int IdTaller, String NombreSala, String TipoSala ) {
 		this.IdTaller = IdTaller;
 		this.NombreSala = NombreSala;

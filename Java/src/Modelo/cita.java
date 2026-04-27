@@ -1,11 +1,7 @@
-/**
- * 
- */
 package Modelo;
-
 /**
- * difinar los clses y su atribute.
- * 
+ * Clase que representa una cita.
+ * Define los atributos y métodos (getters/setters) necesarios.
  */
 public class Cita {
 	 private int IdCita;
@@ -15,12 +11,25 @@ public class Cita {
 	 private String Fecha;
 	 private String Hora;
 	 private int Duracion;
-
+	 
+	 /**
+	  * Constructor vacío
+	  */
 	    public Cita() {
+	    	
 	    }
-
+	 /**
+	  * Constructor con parámetros
+	  * @param IdCita
+	  * @param IdCliente
+	  * @param IdTraje
+	  * @param IdTaller
+	  * @param Fecha
+	  * @param Hora
+	  * @param Duracion
+	  */
 	    public Cita(int IdCita, int IdCliente, int IdTraje, int IdTaller, String Fecha, String Hora, int Duracion ) {
-	        this.IdCita = IdCita;
+	    	this.IdCita = IdCita;
 	        this.IdCliente = IdCliente;
 	        this.IdTraje = IdTraje;
 	        this.IdTaller = IdTaller;

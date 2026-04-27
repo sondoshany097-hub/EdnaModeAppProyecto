@@ -7,9 +7,13 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * 
+ * Clase DAO encargada de gestionar las operaciones CRUD de la tabla TRAJES.
  */
 public class TrajeDAO {
+	
+	/**
+     * Inserta un nuevo traje en la base de datos
+     */
 	public boolean guardarTraje(Traje traje) {
         String sql = "INSERT INTO TRAJES (ID_CLIENTE, NOMBRE, ESTADO) VALUES (?, ?, ?)";
 
@@ -29,6 +33,9 @@ public class TrajeDAO {
         }
     }
 	
+	/**
+     * Lista todos los trajes
+     */
 	public List<Traje> listarTrajes() {
         List<Traje> lista = new ArrayList<>();
         String sql = "SELECT * FROM TRAJES";
@@ -53,6 +60,10 @@ public class TrajeDAO {
 
         return lista;
     }
+	
+	/**
+     * Lista trajes con el nombre del cliente (JOIN)
+     */
 	public List<String[]> listarTrajesConCliente() {
         List<String[]> lista = new ArrayList<>();
 
@@ -82,6 +93,10 @@ public class TrajeDAO {
 
         return lista;
 	}
+	
+	/**
+     * Actualiza un traje existente
+     */
 	public boolean actualizarTraje(Traje traje) {
         String sql = "UPDATE TRAJES SET ID_CLIENTE = ?, NOMBRE = ?, ESTADO = ? WHERE ID_TRAJE = ?";
 
@@ -102,6 +117,9 @@ public class TrajeDAO {
         }
     }
 	
+	/**
+     * Elimina un traje por ID
+     */
 	 public boolean eliminarTraje(int idTraje) {
 	        String sql = "DELETE FROM TRAJES WHERE ID_TRAJE = ?";
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package dao;
 
 import Modelo.*;
@@ -8,9 +5,13 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * 
+ * Clase DAO para gestionar las operaciones CRUD de la tabla CITAS.
+ * Se encarga de la comunicación directa con la base de datos.
  */
 public class CitaDAO {
+	/**
+     * Inserta una nueva cita en la base de datos
+     */
 	public boolean guardarCita(Cita cita) {
 		String sql = "INSERT INTO CITAS (ID_CLIENTE, ID_TRAJE, ID_TALLER, FECHA, HORA, DURACION) VALUES (?,?,?,?,?,?)";
 		try (Connection con = ConexionBD.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -36,7 +37,9 @@ public class CitaDAO {
 			return false;
 		}
 	}
-
+	/**
+     * Devuelve todas las citas
+     */
 	public List<Cita> listarCitas() {
 		List<Cita> lista = new ArrayList<>();
 		String sql = "SELECT * FROM CITAS";
@@ -66,8 +69,8 @@ public class CitaDAO {
 	}
 
 	/**
-	 * Update cita
-	 */
+     * Actualiza una cita existente
+     */
 	public boolean actualizarCliente(Cita cita) {
 		String sql = "UPDATE CITAS SET ID_CLIENTE = ?, ID_TRAJE = ?, ID_TALLER = ?, FECHA = ?, HORA = ?, DURACION = ? WHERE ID_CITA = ?";
 
@@ -88,11 +91,11 @@ public class CitaDAO {
 			System.out.println("Error updating cita: " + e.getMessage());
 			return false;
 		}
-	}
+		}
 
 	/**
-	 * Eliminar cita con ID
-	 */
+     * Elimina una cita por su ID
+     */
 	public boolean eliminarCitas(int idCita) {
 		String sql = "DELETE FROM CITAS WHERE ID_CITA = ?";
 		try (Connection con = ConexionBD.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {

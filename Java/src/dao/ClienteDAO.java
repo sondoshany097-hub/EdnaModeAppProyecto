@@ -7,17 +7,15 @@ import java.sql.*;
 import java.util.*;
 /**
  * 
+ * Clase DAO encargada de gestionar las operaciones CRUD de la tabla CLIENTES.
+ * Se comunica directamente con la base de datos.
  */
+
 public class ClienteDAO {
 	/**
-	 * Etsa method insert nuevo caliente en base de datos
+	 * Inserta un nuevo cliente en la base de datos
 	 */
 	
-	/**
-	 * 
-	 * @param cliente
-	 * @return
-	 */
 	public boolean gurdarCliente(Cliente cliente) {
 		String sql = "INSERT INTO CLIENTES (NOMBRE, SUPERPODER, COLORES, TIPO) VALUES (?, ?, ?, ?)";
 		try (Connection con = ConexionBD.conectar();
@@ -38,7 +36,7 @@ public class ClienteDAO {
 		}
 		}
 		/**
-		 * Devolver todos lo cliente de base de datos
+		 * Devuelve todos los clientes de la base de datos
 		 */
 		public List<Cliente> listarClientes() {
 	        List<Cliente> lista = new ArrayList<>();
@@ -67,9 +65,8 @@ public class ClienteDAO {
 	        
 	    }
 		/**
-         * Update cliente
-         */
-		
+	     * Actualiza un cliente existente
+	     */
 		public boolean actualizarCliente(Cliente cliente) {
 			String sql = "UPDATE CLIENTES SET NOMBRE = ?, SUPERPODER = ?, COLORES = ?, TIPO = ? WHERE ID_CLIENTE = ?";
 				try (Connection con = ConexionBD.conectar();
@@ -91,8 +88,8 @@ public class ClienteDAO {
 				}
 			}
 		/**
-		 * Eliminar cliente con ID
-		 */
+	     * Elimina un cliente por su ID
+	     */
 				
 		public boolean eliminarCliente(int idCliente) {
 			String sql = "DELETE FROM CLIENTES WHERE ID_CLIENTE = ?";
@@ -109,9 +106,4 @@ public class ClienteDAO {
 			
 				
 		}
-			
-		}
- 		
-		
-	
-
+}

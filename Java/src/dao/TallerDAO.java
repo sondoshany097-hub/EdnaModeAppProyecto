@@ -1,15 +1,16 @@
-/**
- * 
- */
 package dao;
 import java.sql.*;
 import java.util.*;
 import Modelo.*;
 
 /**
- * Insert nuevo taller en base de datos
+ * Clase DAO encargada de gestionar las operaciones CRUD de la tabla TALLERES.
  */
 public class TallerDAO {
+	
+	/**
+     * Inserta un nuevo taller en la base de datos
+     */
 	public boolean guardarTaller(Taller taller) {
 		String sql = "INSERT INTO TALLERES (NOMBRE_SALA, TIPO_SALA) VALUES (?,?)";
 		try (Connection con = ConexionBD.conectar();
@@ -21,14 +22,12 @@ public class TallerDAO {
 		} catch (SQLException e) {
 			System.out.println("Error guardar taller" +e.getMessage() );
 			return false;
-			
+			}
 		}
-	}
 	
 	/**
-	 * mostar todos los talleres del base de datos 
-	 * @return
-	 */
+     * Devuelve todos los talleres de la base de datos
+     */
 	public List<Taller> listarTalleres() {
         List<Taller> lista = new ArrayList<>();
         String sql = "SELECT * FROM TALLERES";
@@ -52,10 +51,8 @@ public class TallerDAO {
         }
 	
 	/**
-	 * Actualizar talleres que existen en base de datos 
-	 */
-	
-	
+     * Actualiza un taller existente
+     */
 	public boolean actualizarTaller(Taller taller) {
 		String sql = "UPDATE TALLERES SET NOMBRE_SALA = ?, TIPO_SALA = ? WHERE ID_TALLER = ?";
 		
@@ -76,10 +73,8 @@ public class TallerDAO {
 	}
 	
 	/**
-	 * Eliminar traje 
-	 * @param idTaller
-	 * @return
-	 */
+     * Elimina un taller por su ID
+     */
 	public boolean eliminarTaller(int idTaller) {
 		String sql = "DELETE FROM TALLERES WHERE ID_TALLER = ?";
 
