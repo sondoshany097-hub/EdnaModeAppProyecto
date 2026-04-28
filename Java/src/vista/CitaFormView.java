@@ -54,7 +54,7 @@ public class CitaFormView extends JFrame {
         initComponents();
 
         cargarClientes();
-        cargarTrajes();
+        //cargarTrajes();
         cargarTalleres();
 
         if (citaEditar != null) {
@@ -115,12 +115,12 @@ public class CitaFormView extends JFrame {
         cbTaller.setBounds(220, 230, 280, 32);
         getContentPane().add(cbTaller);
 
-        txtFecha = new JTextField();
+        txtFecha = new JTextField("YYYY-MM-DD");
         txtFecha.setBounds(220, 290, 280, 32);
         txtFecha.setToolTipText("YYYY-MM-DD");
         getContentPane().add(txtFecha);
 
-        txtHora = new JTextField();
+        txtHora = new JTextField("HH:MM");
         txtHora.setBounds(220, 350, 280, 32);
         txtHora.setToolTipText("HH:MM");
         getContentPane().add(txtHora);
@@ -151,9 +151,21 @@ public class CitaFormView extends JFrame {
             new CitasView().setVisible(true);
             dispose();
         });
+        cbCliente.addActionListener(e -> filtrarTrajesPorCliente());
     }
 
-    private void abrirFormularioCliente() {
+    private void filtrarTrajesPorCliente() {
+    	ItemCombo cliente = (ItemCombo) cbCliente.getSelectedItem();
+
+        if (cliente == null) return;
+        cbTraje.removeAllItems();
+        List<Traje> lista = trajeController.listarTrajesPorCliente(cliente.getId());
+        for (Traje traje : lista) {
+            cbTraje.addItem(new ItemCombo(traje.getIdTraje(), traje.getNombreTraje()));
+        }
+	}
+
+	private void abrirFormularioCliente() {
         setVisible(false);
         new ClienteFormView(this).setVisible(true);
     }
@@ -173,7 +185,7 @@ public class CitaFormView extends JFrame {
         Integer idTaller = tallerSeleccionado != null ? tallerSeleccionado.getId() : null;
 
         cargarClientes();
-        cargarTrajes();
+        //cargarTrajes();
         cargarTalleres();
 
         if (idCliente != null) seleccionarCombo(cbCliente, idCliente);
@@ -190,14 +202,14 @@ public class CitaFormView extends JFrame {
         }
     }
 
-    private void cargarTrajes() {
-        cbTraje.removeAllItems();
-        List<Traje> lista = trajeController.listarTraje();
-
-        for (Traje traje : lista) {
-            cbTraje.addItem(new ItemCombo(traje.getIdTraje(), traje.getNombreTraje()));
-        }
-    }
+//    private void cargarTrajes() {
+//        cbTraje.removeAllItems();
+//        List<Traje> lista = trajeController.listarTraje();
+//
+//        for (Traje traje : lista) {
+//            cbTraje.addItem(new ItemCombo(traje.getIdTraje(), traje.getNombreTraje()));
+//        }
+//    }
 
     private void cargarTalleres() {
         cbTaller.removeAllItems();

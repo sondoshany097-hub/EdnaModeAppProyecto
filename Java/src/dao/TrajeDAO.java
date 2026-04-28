@@ -135,4 +135,31 @@ public class TrajeDAO {
 	            return false;
 	        }
 	        }
+	 public List<Traje> obtenerTrajesPorCliente(int idCliente) {
+		    List<Traje> lista = new ArrayList<>();
+		    String sql = "SELECT * FROM TRAJES WHERE ID_CLIENTE = ?";
+
+		    try (Connection con = ConexionBD.conectar();
+		         PreparedStatement ps = con.prepareStatement(sql)) {
+
+		        ps.setInt(1, idCliente);
+		        ResultSet rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            Traje traje = new Traje();
+		            traje.setIdTraje(rs.getInt("ID_TRAJE"));
+		            traje.setIdCliente(rs.getInt("ID_CLIENTE"));
+		            traje.setNombreTraje(rs.getString("NOMBRE"));
+		            traje.setEstado(rs.getString("ESTADO"));
+
+		            lista.add(traje);
+		        }
+
+		    } catch (SQLException e) {
+		        System.out.println("Error filtrar trajes: " + e.getMessage());
+		    }
+
+		    return lista;
+		}
 	 }
+

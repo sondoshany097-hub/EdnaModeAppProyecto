@@ -67,4 +67,7 @@ public class TrajeController {
 	public boolean eliminarTraje ( int idTraje) {
 		return trajeDAO.eliminarTraje(idTraje);
 	}
+	public List<Traje> listarTrajesPorCliente(int idCliente) {
+	    return trajeDAO.obtenerTrajesPorCliente(idCliente);
+	}
 	}
