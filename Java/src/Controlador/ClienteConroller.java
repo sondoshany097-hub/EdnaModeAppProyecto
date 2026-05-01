@@ -1,12 +1,7 @@
-/**
- * 
- */
 package Controlador;
 import dao.*;
 import Modelo.Cliente;
 import java.util.*;
-
-
 /**
  * Clase controlador para gestionar las operaciones relacionadas con los clientes.
  * Actúa como intermediario entre la vista y la base de datos (DAO).
@@ -14,11 +9,11 @@ import java.util.*;
  */
 
 public class ClienteConroller {
-	/**
+	/*
 	 * Objeto DAO para acceder a la base de datos
 	 */
 	private ClienteDAO clienteDAO;
-	/**
+	/*
 	 * Constructor: inicializa el objeto ClienteDAO
 	 */
 	public ClienteConroller() {
@@ -31,8 +26,8 @@ public class ClienteConroller {
 	 * @return true si se guarda correctamente, false en caso contrario
 	 */
 	
-	public boolean gurdarCliente(Cliente cliente) {
-		return clienteDAO.gurdarCliente(cliente);	
+	public int gurdarCliente(Cliente cliente) {
+		return clienteDAO.guardarCliente(cliente);	
 	}
 	
 	/**
@@ -58,4 +53,5 @@ public class ClienteConroller {
 	public boolean eliminarCliente ( int idCliente) {
 		return clienteDAO.eliminarCliente(idCliente);
 	}
+	
 }

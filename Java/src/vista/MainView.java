@@ -4,10 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Main menu of the application.
- */
+ * Ventana principal del menú de la aplicación.
+ * Permite acceder a los diferentes módulos del sistema:
+ * clientes, trajes, citas, talleres y cierre de sesión.
+ * Actúa como punto central de navegación entre vistas.
+*/
 public class MainView extends JFrame {
 
+	/**
+	 * Constructor del menú principal.
+	 * Inicializa la ventana y carga los componentes gráficos.
+	*/
     public MainView() {
         setTitle("Edna Moda - Main Menu");
         setSize(700, 500);
@@ -18,12 +25,19 @@ public class MainView extends JFrame {
         initWindow();
         initComponents();
     }
-
+    
+    /**
+    Configura las propiedades básicas de la ventana principal.
+    */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos del menú,
+     * incluyendo botones de navegación hacia los distintos módulos.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
@@ -84,7 +98,13 @@ public class MainView extends JFrame {
             dispose();
         });
     }
-
+    
+    /**
+     * Aplica estilos visuales personalizados a los botones.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);

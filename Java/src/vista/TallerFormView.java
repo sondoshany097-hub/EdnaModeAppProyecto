@@ -6,18 +6,39 @@ import Modelo.Taller;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Ventana de formulario para la creación y edición de talleres.
+ * Permite introducir o modificar la información de un taller, incluyendo
+ * su nombre y tipo de sala.
+ * Forma parte de la capa de vista y se comunica con el controlador
+ * para realizar operaciones de guardado o actualización.
+*/
 public class TallerFormView extends JFrame {
-
+	
+	/** Campo de texto para el nombre de la sala */
     private JTextField txtNombreSala;
+    
+    /** ComboBox para seleccionar el tipo de sala */
     private JComboBox<String> cbTipoSala;
 
+    /** Taller en modo edición; null si es un nuevo registro */
     private Taller tallerEditar;
+    
+    /** Controlador encargado de la lógica de talleres */
     private TallerController tallerController;
 
+    /**
+     * Constructor por defecto.
+     * Inicializa el formulario para crear un nuevo taller.
+    */
     public TallerFormView() {
         this(null);
     }
-
+    
+    /**
+     * Constructor para editar un taller existente.
+     * @param taller Objeto Taller a editar
+    */
     public TallerFormView(Taller taller) {
         this.tallerEditar = taller;
         this.tallerController = new TallerController();
@@ -36,11 +57,18 @@ public class TallerFormView extends JFrame {
         }
     }
 
+    /**
+     * Inicializa la configuración básica de la ventana.
+    */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos del formulario,
+     * incluyendo campos de texto, etiquetas y botones.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color textColor = new Color(40, 40, 40);
@@ -92,11 +120,18 @@ public class TallerFormView extends JFrame {
         });
     }
 
+    /**
+     * Carga los datos del taller en el formulario cuando está en modo edición.
+     */
     private void cargarDatosTaller() {
         txtNombreSala.setText(tallerEditar.getNombresala() == null ? "" : tallerEditar.getNombresala());
         cbTipoSala.setSelectedItem(tallerEditar.getTiposala());
     }
 
+    /**
+     * Valida los datos introducidos y guarda o actualiza el taller.
+     * Si el taller es nuevo, lo crea; si existe, lo actualiza.
+     */
     private void guardarOActualizarTaller() {
         String nombreSala = txtNombreSala.getText().trim();
         String tipoSala = cbTipoSala.getSelectedItem() != null
@@ -118,7 +153,7 @@ public class TallerFormView extends JFrame {
             resultado = tallerController.guardarTaller(taller);
         } else {
             taller.setIdTaller(tallerEditar.getIdTaller());
-            resultado = tallerController.actiualizarTaller(taller);
+            resultado = tallerController.actualizarTaller(taller);
         }
 
         if (resultado) {
@@ -130,6 +165,11 @@ public class TallerFormView extends JFrame {
         }
     }
 
+    /***Aplica estilos visuales personalizados a un botón.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);

@@ -6,15 +6,18 @@ import java.sql.*;
  */
 public class ConexionBD {
 	private String driver = "com.mysql.cj.jdbc.Driver"; 
-	/**
+	
+	/*
 	 * URL de conexión a la base de datos
 	 */
-	private static final String URL = "jdbc:mysql://localhost/Proyecto_EdnaMode"; 
-	/**
+	private static final String URL = "jdbc:mysql://localhost/Proyecto_EdnaMode";
+	
+	/*
 	 * Usuario de la base de datos
 	 */
 	private static final String USER = "root"; 
-	/**
+	
+	/*
 	 * Contraseña de la base de datos
 	 */
 	private static final String PASSWORD = "Root1234";

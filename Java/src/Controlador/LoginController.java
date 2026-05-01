@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Controlador;
 import dao.*;
 
@@ -13,11 +10,11 @@ import dao.*;
  */
 
 public class LoginController {
-	/**
+	/*
 	 * Objeto DAO para acceder a los datos de usuarios
 	 */
 	private UsuarioDAO usuarioDAO;
-	/**
+	/*
 	 * Constructor: inicializa el objeto UsuarioDAO
 	 */
 	public LoginController() {

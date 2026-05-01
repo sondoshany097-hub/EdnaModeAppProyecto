@@ -10,14 +10,31 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
 
-
+/**
+ * Ventana de gestión de talleres.
+ * Permite visualizar, crear, editar y eliminar talleres registrados en el sistema.
+ * Forma parte de la capa de vista y se comunica con el controlador
+ * para obtener y manipular los datos de los talleres.
+*/
 public class TalleresView extends JFrame {
-
+	
+	/** Tabla donde se muestran los talleres */
     private JTable tableTalleres;
+    
+    /** Modelo de la tabla para gestionar los datos */
     private DefaultTableModel tableModel;
+    
+    /** Controlador encargado de la lógica de talleres */
     private TallerController tallerController;
+    
+    /** Lista en memoria de los talleres cargados */
     private List<Taller> listaTalleres;
 
+    /**
+     * Constructor de la vista de talleres.
+     * Inicializa la ventana, los componentes gráficos y carga los datos
+     * desde la base de datos.
+    */
     public TalleresView() {
         tallerController = new TallerController();
 
@@ -32,11 +49,18 @@ public class TalleresView extends JFrame {
         cargarTalleresDesdeBD();
     }
 
+    /**
+     * Inicializa la configuración básica de la ventana.
+     */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos de la interfaz,
+     * incluyendo tabla, botones y eventos de acción.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
@@ -98,6 +122,9 @@ public class TalleresView extends JFrame {
         });
     }
 
+    /**
+     * Carga los talleres desde la base de datos y los muestra en la tabla.
+     */
     private void cargarTalleresDesdeBD() {
         tableModel.setRowCount(0);
 
@@ -111,6 +138,10 @@ public class TalleresView extends JFrame {
         }
     }
 
+    /**
+     * Permite editar el taller seleccionado en la tabla.
+     * Abre el formulario en modo edición.
+     */
     private void editarTallerSeleccionado() {
         int row = tableTalleres.getSelectedRow();
 
@@ -125,6 +156,9 @@ public class TalleresView extends JFrame {
         dispose();
     }
     
+    /**
+     * Elimina el taller seleccionado tras confirmación del usuario.
+     */
     private void borrarTallerSeleccionado() {
         int row = tableTalleres.getSelectedRow();
 
@@ -155,6 +189,12 @@ public class TalleresView extends JFrame {
         }
     }
 
+    /**
+     * Aplica estilos visuales personalizados a un botón.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
@@ -166,6 +206,9 @@ public class TalleresView extends JFrame {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
+    /**
+     * Aplica estilos visuales a la tabla, incluyendo filas y encabezados.
+    */
     private void styleTable(JTable table) {
         Color darkGreen = new Color(85, 107, 47);
 

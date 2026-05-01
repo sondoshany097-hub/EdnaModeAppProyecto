@@ -1,6 +1,3 @@
-/**
- * 
- */
 package Controlador;
 import dao.*;
 import Modelo.*;
@@ -30,8 +27,13 @@ public class TrajeController {
 	 * @param traje Objeto Traje a guardar
 	 * @return true si se guarda correctamente, false en caso contrario
 	 */
-	public boolean gurdarTraje(Traje traje) {
-		return trajeDAO.guardarTraje(traje);
+	public boolean guardarOActualizarTraje(Traje traje) {
+
+	    if (traje.getIdTraje() == 0) {
+	        return trajeDAO.guardarTraje(traje); // INSERT
+	    } else {
+	        return trajeDAO.actualizarTraje(traje); // UPDATE
+	    }
 	}
 	
 	/**
@@ -67,7 +69,36 @@ public class TrajeController {
 	public boolean eliminarTraje ( int idTraje) {
 		return trajeDAO.eliminarTraje(idTraje);
 	}
-	public List<Traje> listarTrajesPorCliente(int idCliente) {
-	    return trajeDAO.obtenerTrajesPorCliente(idCliente);
+	
+	/**
+     * Obtiene los trajes asociados a un cliente específico
+     *
+     * @param idCliente ID del cliente
+     * @return Lista de trajes del cliente
+     */
+	
+	public List<Traje> listarTrajesPorCliente(int idCliente) { 
+		return trajeDAO.obtenerTrajesPorCliente(idCliente); }
+	
+	 /**
+     * Actualiza el estado de un traje (por ejemplo: pendiente, entregado, etc.)
+     *
+     * @param idTraje ID del traje
+     * @param estado Nuevo estado del traje
+     * @return true si la actualización fue exitosa
+     */
+	public boolean actualizarEstadoTraje(int idTraje, String estado){
+	    return trajeDAO.actualizarEstadoTraje(idTraje, estado);
 	}
+	
+	/**
+     * Obtiene el ID del traje asociado a un cliente
+     *
+     * @param idCliente ID del cliente
+     * @return ID del traje correspondiente
+     */
+	public int obtenerIdTrajePorCliente(int idCliente) {
+	    return trajeDAO.obtenerIdTrajePorCliente(idCliente);
 	}
+	
+}

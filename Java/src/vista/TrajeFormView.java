@@ -1,5 +1,4 @@
 package vista;
-
 import Controlador.ClienteConroller;
 import Controlador.TrajeController;
 import Modelo.Cliente;
@@ -10,29 +9,65 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Ventana de formulario para la creación y edición de trajes.
+ * Permite asignar un traje a un cliente, definiendo su nombre y estado.
+ * Puede utilizarse de forma independiente o desde el formulario de citas,
+ * permitiendo recargar datos en la vista anterior.
+*/
+
 public class TrajeFormView extends JFrame {
 
+	/** ComboBox para seleccionar el cliente */
     private JComboBox<ItemCombo> cbCliente;
+    
+    /** Campo de texto para el nombre del traje */
     private JTextField txtNombre;
+    
+    /** ComboBox para seleccionar el estado del traje */
     private JComboBox<String> cbEstado;
 
+    /** Traje en modo edición; null si es un nuevo registro */
     private Traje trajeEditar;
+    
+    /** Controlador encargado de la lógica de trajes */
     private TrajeController trajeController;
+    
+    /** Controlador de clientes para cargar datos */
     private ClienteConroller clienteController;
+    
+    /** Referencia al formulario de citas que lo invoca (opcional) */
     private CitaFormView citaFormPadre;
 
+    /**
+     * Constructor por defecto.
+     * Inicializa el formulario para crear un nuevo traje.
+    */
     public TrajeFormView() {
         this(null, null);
     }
 
+    /**
+     * Constructor para editar un traje existente.
+     * @param traje Objeto Traje a editar
+    */
     public TrajeFormView(Traje traje) {
         this(traje, null);
     }
-
+    
+    /**
+     * Constructor utilizado cuando se abre desde el formulario de citas.
+     * @param citaFormPadre Referencia al formulario de citas
+    */
     public TrajeFormView(CitaFormView citaFormPadre) {
         this(null, citaFormPadre);
     }
 
+    /**
+     * Constructor principal que permite definir traje y vista padre.
+     * @param traje Traje a editar (null si es nuevo)
+     * @param citaFormPadre Vista de citas que invoca este formulario
+    */
     public TrajeFormView(Traje traje, CitaFormView citaFormPadre) {
         this.trajeEditar = traje;
         this.citaFormPadre = citaFormPadre;
@@ -53,12 +88,19 @@ public class TrajeFormView extends JFrame {
             cargarDatosTraje();
         }
     }
-
+    
+    /**
+     * Inicializa la configuración básica de la ventana.
+     */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos del formulario,
+     * incluyendo campos, etiquetas y botones.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color textColor = new Color(40, 40, 40);
@@ -92,7 +134,7 @@ public class TrajeFormView extends JFrame {
         txtNombre.setBounds(230, 165, 280, 32);
         getContentPane().add(txtNombre);
 
-        cbEstado = new JComboBox<>(new String[]{"Diseño", "Costura", "Taller"});
+        cbEstado = new JComboBox<>(new String[]{"Diseño", "Costura", "Pruebas"});
         cbEstado.setBounds(230, 228, 280, 32);
         getContentPane().add(cbEstado);
 
@@ -113,6 +155,10 @@ public class TrajeFormView extends JFrame {
         btnCancelar.addActionListener(e -> volverPantallaAnterior());
     }
 
+    /**
+     * Carga la lista de clientes en el ComboBox.
+     */
+
     private void cargarClientes() {
         cbCliente.removeAllItems();
         List<Cliente> lista = clienteController.listarClientes();
@@ -122,12 +168,20 @@ public class TrajeFormView extends JFrame {
         }
     }
 
+    /**
+     * Carga los datos del traje en modo edición.
+     */
     private void cargarDatosTraje() {
         txtNombre.setText(trajeEditar.getNombreTraje() == null ? "" : trajeEditar.getNombreTraje());
         cbEstado.setSelectedItem(trajeEditar.getEstado());
         seleccionarCliente(trajeEditar.getIdCliente());
     }
 
+    /**
+     * Selecciona un cliente en el ComboBox según su ID.
+     * @param idBuscado ID del cliente a seleccionar
+     * */
+    
     private void seleccionarCliente(int idBuscado) {
         for (int i = 0; i < cbCliente.getItemCount(); i++) {
             ItemCombo item = cbCliente.getItemAt(i);
@@ -138,6 +192,9 @@ public class TrajeFormView extends JFrame {
         }
     }
 
+    /**
+     * Valida los datos introducidos y guarda o actualiza el traje.
+     */
     private void guardarOActualizarTraje() {
         ItemCombo clienteSeleccionado = (ItemCombo) cbCliente.getSelectedItem();
         String nombre = txtNombre.getText().trim();
@@ -156,7 +213,7 @@ public class TrajeFormView extends JFrame {
         boolean resultado;
 
         if (trajeEditar == null) {
-            resultado = trajeController.gurdarTraje(traje);
+            resultado = trajeController.guardarOActualizarTraje(traje);
         } else {
             traje.setIdTraje(trajeEditar.getIdTraje());
             resultado = trajeController.actiualizarTraje(traje);
@@ -170,6 +227,10 @@ public class TrajeFormView extends JFrame {
         }
     }
 
+    /**
+     * Vuelve a la pantalla anterior.
+     * Si fue abierto desde citas, recarga los combos en esa vista.
+    */
     private void volverPantallaAnterior() {
         if (citaFormPadre != null) {
             citaFormPadre.recargarCombos();
@@ -180,6 +241,12 @@ public class TrajeFormView extends JFrame {
         dispose();
     }
 
+    /**
+     * Aplica estilos visuales personalizados a un botón.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);

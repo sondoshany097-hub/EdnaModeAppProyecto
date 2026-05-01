@@ -11,12 +11,29 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Ventana principal para la gestión de citas.
+ * Permite visualizar todas las citas registradas en una tabla,
+ * así como realizar operaciones de creación, edición y eliminación.
+ * Forma parte de la capa de vista y se comunica con el controlador
+ * para obtener y manipular los datos.
+*/
 public class CitasView extends JFrame {
 
+	/** Tabla donde se muestran las citas */
     private JTable tableCitas;
+    
+    /** Modelo de la tabla para gestionar los datos */
     private DefaultTableModel tableModel;
+    
+    /** Controlador encargado de la lógica de negocio de las citas */
     private CitaController citaController;
 
+    /**
+     * Constructor de la vista de citas.
+     * Inicializa la ventana, los componentes gráficos y carga los datos
+     * desde la base de datos.
+    */
     public CitasView() {
         citaController = new CitaController();
 
@@ -31,11 +48,18 @@ public class CitasView extends JFrame {
         cargarCitasDesdeBD();
     }
 
+    /**
+     * Configura las propiedades básicas de la ventana.
+    */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos de la interfaz.
+     * Incluye tabla, botones y eventos asociados.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
@@ -98,6 +122,10 @@ public class CitasView extends JFrame {
         });
     }
 
+    /**
+     * Oculta la columna del ID en la tabla.
+     * Se mantiene internamente para operaciones pero no se muestra al usuario.
+    */
     private void ocultarColumnaId() {
         TableColumn columnaId = tableCitas.getColumnModel().getColumn(0);
         columnaId.setMinWidth(0);
@@ -105,11 +133,11 @@ public class CitasView extends JFrame {
         columnaId.setPreferredWidth(0);
     }
 
+    /**
+     * Carga las citas desde la base de datos y las muestra en la tabla.
+    */
     private void cargarCitasDesdeBD() {
         tableModel.setRowCount(0);
-
-        // نفترض أن هذا الميثود يرجع:
-        // [id, cliente, traje, taller, fecha, hora, duracion]
         List<String[]> lista = citaController.listarCitasConNombres();
 
         for (String[] fila : lista) {
@@ -119,6 +147,10 @@ public class CitasView extends JFrame {
         }
     }
 
+    /**
+     * Permite editar la cita seleccionada en la tabla.
+     * Abre el formulario en modo edición.
+    */
     private void editarCitaSeleccionada() {
         int row = tableCitas.getSelectedRow();
 
@@ -147,6 +179,9 @@ public class CitasView extends JFrame {
         }
     }
 
+    /**
+     * Elimina la cita seleccionada tras confirmación del usuario.
+    */
     private void borrarCitaSeleccionada() {
         int row = tableCitas.getSelectedRow();
 
@@ -176,6 +211,12 @@ public class CitasView extends JFrame {
         }
     }
 
+    /**
+     * Aplica estilos visuales a los botones.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
@@ -186,7 +227,11 @@ public class CitasView extends JFrame {
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
-
+    
+    /**
+     * Aplica estilos visuales a la tabla.
+     * Personaliza colores, fuentes y encabezados.
+    */
     private void styleTable(JTable table) {
         Color darkGreen = new Color(85, 107, 47);
 

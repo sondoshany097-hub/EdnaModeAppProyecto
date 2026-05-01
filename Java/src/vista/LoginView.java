@@ -7,17 +7,29 @@ import java.awt.*;
 import java.net.URL;
 
 /**
- * Login window of the application.
- * It authenticates the single system user.
- */
+ * Ventana de inicio de sesión de la aplicación.
+ * Permite al usuario autenticarse introduciendo su nombre de usuario
+ * y contraseña. En caso de éxito, accede a la ventana principal del sistema.
+ * Forma parte de la capa de vista y delega la validación al controlador.
+*/
 public class LoginView extends JFrame {
 
+	/** Campo de texto para introducir el nombre de usuario */
     private JTextField txtUser;
+    
+    /** Campo de contraseña para introducir la clave de acceso */
     private JPasswordField txtPassword;
+    
+    /** Botón para iniciar sesión */
     private JButton btnLogin;
 
+    /** Controlador encargado de validar las credenciales */
     private LoginController loginController;
 
+    /**
+     * Constructor de la ventana de login.
+     * Inicializa la interfaz gráfica y sus componentes.
+    */
     public LoginView() {
         loginController = new LoginController();
 
@@ -30,12 +42,18 @@ public class LoginView extends JFrame {
         inicializarVentana();
         inicializarComponentes();
     }
-
+    
+    /**
+     * Configura las propiedades básicas de la ventana.
+    */
     private void inicializarVentana() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(new Color(245, 245, 245));
     }
-
+    /**
+     * Inicializa y organiza los componentes gráficos de la interfaz,
+     * incluyendo campos de texto, etiquetas, botón e imagen del logo.
+    */
     private void inicializarComponentes() {
         Color oliveGreen = new Color(85, 107, 47);
         Color oliveHover = new Color(70, 90, 35);
@@ -104,6 +122,11 @@ public class LoginView extends JFrame {
         btnLogin.addActionListener(e -> iniciarSesion());
     }
 
+    /**
+     * Gestiona el proceso de inicio de sesión.
+     * Valida que los campos no estén vacíos y delega la autenticación
+     * al controlador. Si las credenciales son correctas, abre la ventana principal.
+    */
     private void iniciarSesion() {
         String username = txtUser.getText().trim();
         String password = new String(txtPassword.getPassword()).trim();

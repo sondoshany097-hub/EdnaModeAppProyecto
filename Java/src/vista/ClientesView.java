@@ -10,16 +10,34 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
 
-
+/**
+ * Ventana principal para la gestión de clientes.
+ * Permite visualizar, buscar, filtrar, crear, editar y eliminar clientes.
+ * Forma parte de la capa de vista y se comunica con el controlador
+ * para obtener y manipular los datos almacenados.
+*/
 public class ClientesView extends JFrame {
 
+	/** Tabla donde se muestran los clientes */
     private JTable tableClientes;
+    
+    /** Modelo de la tabla utilizado para gestionar los datos */
     private DefaultTableModel tableModel;
+    
+    /** Campo de texto para realizar búsquedas */
     private JTextField txtBuscar;
+    
+    /** ComboBox para filtrar por tipo de personaje */
     private JComboBox<String> cbTipo;
 
+    /** Controlador encargado de la lógica de negocio de clientes */
     private ClienteConroller clienteController;
 
+    /**
+     * Constructor de la vista de clientes.
+     * Inicializa la ventana, los componentes gráficos y carga los datos
+     * desde la base de datos.
+    */
     public ClientesView() {
         clienteController = new ClienteConroller();
 
@@ -34,11 +52,19 @@ public class ClientesView extends JFrame {
         cargarClientesDesdeBD();
     }
 
+    /**
+     * Inicializa la configuración básica de la ventana.
+    */
+
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa y organiza los componentes gráficos de la interfaz,
+     * incluyendo tabla, filtros, botones y eventos.
+    */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
@@ -142,6 +168,9 @@ public class ClientesView extends JFrame {
         btnFiltrar.addActionListener(e -> filtrarClientes());
     }
 
+    /**
+     * Carga todos los clientes desde la base de datos y los muestra en la tabla.
+     */
     private void cargarClientesDesdeBD() {
         tableModel.setRowCount(0);
 
@@ -158,6 +187,9 @@ public class ClientesView extends JFrame {
         }
     }
 
+    /**
+     * Filtra los clientes según el texto introducido y el tipo seleccionado.
+     */
     private void filtrarClientes() {
         String texto = txtBuscar.getText().trim().toLowerCase();
         String tipoSeleccionado = cbTipo.getSelectedItem().toString();
@@ -187,6 +219,10 @@ public class ClientesView extends JFrame {
         }
     }
 
+    /**
+     * Permite editar el cliente seleccionado en la tabla.
+     * Abre el formulario en modo edición.
+     */
     private void editarClienteSeleccionado() {
         int row = tableClientes.getSelectedRow();
 
@@ -205,7 +241,10 @@ public class ClientesView extends JFrame {
         new ClienteFormView(cliente).setVisible(true);
         dispose();
     }
-
+    
+    /**
+     * Elimina el cliente seleccionado tras confirmación del usuario.
+     */
     private void borrarClienteSeleccionado() {
         int row = tableClientes.getSelectedRow();
 
@@ -235,6 +274,12 @@ public class ClientesView extends JFrame {
         }
     }
 
+    /**
+     * Aplica estilos visuales personalizados a un botón.
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+    */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
@@ -246,6 +291,11 @@ public class ClientesView extends JFrame {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
+    /**
+     * Aplica estilos visuales a la tabla, incluyendo encabezados y filas.
+
+     * @param table
+     */
     private void styleTable(JTable table) {
         Color darkGreen = new Color(85, 107, 47);
 

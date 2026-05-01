@@ -9,13 +9,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
-
+	
+	/**
+	 * Vista de gestión de trajes.
+	 * Permite listar, crear, editar y eliminar trajes asociados a clientes.
+	 */
 public class TrajesView extends JFrame {
 
     private JTable tableTrajes;
     private DefaultTableModel tableModel;
     private TrajeController trajeController;
 
+    /**
+     * Inicializa la ventana de gestión de trajes y carga los datos desde BD.
+     */
     public TrajesView() {
         trajeController = new TrajeController();
 
@@ -29,12 +36,17 @@ public class TrajesView extends JFrame {
         initComponents();
         cargarTrajesDesdeBD();
     }
-
+    /**
+     * Configura el layout y estilo base de la ventana.
+     */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
 
+    /**
+     * Inicializa los componentes visuales de la vista y sus eventos.
+     */
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
         Color gold = new Color(201, 169, 97);
@@ -57,7 +69,9 @@ public class TrajesView extends JFrame {
         tableTrajes = new JTable(tableModel);
         styleTable(tableTrajes);
 
-        // Hide ID column visually
+        /*
+         * Oculta la columna ID en la vista
+         */
         tableTrajes.getColumnModel().getColumn(0).setMinWidth(0);
         tableTrajes.getColumnModel().getColumn(0).setMaxWidth(0);
         tableTrajes.getColumnModel().getColumn(0).setWidth(0);
@@ -102,6 +116,9 @@ public class TrajesView extends JFrame {
         });
     }
 
+    /**
+     * Carga todos los trajes desde la base de datos en la tabla.
+     */
     private void cargarTrajesDesdeBD() {
         tableModel.setRowCount(0);
 
@@ -117,6 +134,9 @@ public class TrajesView extends JFrame {
         }
     }
 
+    /**
+     * Abre el formulario de edición del traje seleccionado.
+     */
     private void editarTrajeSeleccionado() {
         int row = tableTrajes.getSelectedRow();
 
@@ -145,6 +165,9 @@ public class TrajesView extends JFrame {
         }
     }
 
+    /**
+     * Elimina el traje seleccionado después de confirmación del usuario.
+     */
     private void borrarTrajeSeleccionado() {
         int row = tableTrajes.getSelectedRow();
 
@@ -174,6 +197,9 @@ public class TrajesView extends JFrame {
         }
     }
 
+    /**
+     * Aplica estilo visual a los botones.
+     */
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setForeground(foreground);
@@ -185,6 +211,9 @@ public class TrajesView extends JFrame {
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
+    /**
+     * Aplica estilo visual a la tabla de trajes.
+     */
     private void styleTable(JTable table) {
         Color darkGreen = new Color(85, 107, 47);
 

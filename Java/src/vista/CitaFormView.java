@@ -1,5 +1,4 @@
 package vista;
-
 import Controlador.CitaController;
 import Controlador.ClienteConroller;
 import Controlador.TallerController;
@@ -18,25 +17,49 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Ventana de formulario para la creación y edición de citas.
+ * Permite seleccionar cliente, traje y taller, así como introducir
+ * fecha, hora y duración de la cita.
+ *
+ * Forma parte de la capa de vista y se comunica con los controladores
+ * para realizar operaciones sobre las citas.
+ */
 public class CitaFormView extends JFrame {
 
+	/** ComboBox para seleccionar cliente */
     private JComboBox<ItemCombo> cbCliente;
+    /** ComboBox para seleccionar traje */
     private JComboBox<ItemCombo> cbTraje;
+    /** ComboBox para seleccionar taller */
     private JComboBox<ItemCombo> cbTaller;
+    /** Campo de texto para la fecha (formato YYYY-MM-DD) */
     private JTextField txtFecha;
+    /** Campo de texto para la hora (formato HH:MM) */
     private JTextField txtHora;
+    /** Campo de texto para la duración de la cita */
     private JTextField txtDuracion;
 
+    /** Controladores para gestionar la lógica de negocio */
     private Cita citaEditar;
     private CitaController citaController;
     private ClienteConroller clienteController;
     private TrajeController trajeController;
     private TallerController tallerController;
 
+    /**
+     * Constructor por defecto.
+     * Inicializa el formulario en modo creación de cita.
+     */
     public CitaFormView() {
         this(null);
     }
 
+    /**
+     * Constructor que permite editar una cita existente.
+     *
+     * @param cita Objeto Cita a editar. Si es null, se crea una nueva cita.
+     */
     public CitaFormView(Cita cita) {
         this.citaEditar = cita;
         this.citaController = new CitaController();
@@ -54,7 +77,6 @@ public class CitaFormView extends JFrame {
         initComponents();
 
         cargarClientes();
-        //cargarTrajes();
         cargarTalleres();
 
         if (citaEditar != null) {
@@ -62,10 +84,17 @@ public class CitaFormView extends JFrame {
         }
     }
 
+    /**
+     * Inicializa la configuración básica de la ventana.
+     */
     private void initWindow() {
         getContentPane().setLayout(null);
         getContentPane().setBackground(Color.WHITE);
     }
+    
+    /**
+     * Inicializa y configura los componentes gráficos del formulario.
+     */
 
     private void initComponents() {
         Color darkGreen = new Color(85, 107, 47);
@@ -154,6 +183,9 @@ public class CitaFormView extends JFrame {
         cbCliente.addActionListener(e -> filtrarTrajesPorCliente());
     }
 
+    /**
+     * Filtra los trajes disponibles según el cliente seleccionado.
+     */
     private void filtrarTrajesPorCliente() {
     	ItemCombo cliente = (ItemCombo) cbCliente.getSelectedItem();
 
@@ -165,16 +197,25 @@ public class CitaFormView extends JFrame {
         }
 	}
 
+    /**
+     * Abre el formulario para crear un nuevo cliente.
+     */
 	private void abrirFormularioCliente() {
         setVisible(false);
         new ClienteFormView(this).setVisible(true);
     }
-
+	
+	/**
+	 * Abre el formulario para crear un nuevo traje.
+	 */
     private void abrirFormularioTraje() {
         setVisible(false);
         new TrajeFormView(this).setVisible(true);
     }
-
+ 
+    /**
+     * Recarga los ComboBox manteniendo las selecciones actuales.
+     */
     public void recargarCombos() {
         ItemCombo clienteSeleccionado = (ItemCombo) cbCliente.getSelectedItem();
         ItemCombo trajeSeleccionado = (ItemCombo) cbTraje.getSelectedItem();
@@ -185,7 +226,6 @@ public class CitaFormView extends JFrame {
         Integer idTaller = tallerSeleccionado != null ? tallerSeleccionado.getId() : null;
 
         cargarClientes();
-        //cargarTrajes();
         cargarTalleres();
 
         if (idCliente != null) seleccionarCombo(cbCliente, idCliente);
@@ -193,6 +233,9 @@ public class CitaFormView extends JFrame {
         if (idTaller != null) seleccionarCombo(cbTaller, idTaller);
     }
 
+    /**
+     * Carga la lista de clientes en el ComboBox.
+     */
     private void cargarClientes() {
         cbCliente.removeAllItems();
         List<Cliente> lista = clienteController.listarClientes();
@@ -201,25 +244,29 @@ public class CitaFormView extends JFrame {
             cbCliente.addItem(new ItemCombo(cliente.getIdCliente(), cliente.getNombreHero()));
         }
     }
-
-//    private void cargarTrajes() {
-//        cbTraje.removeAllItems();
-//        List<Traje> lista = trajeController.listarTraje();
-//
-//        for (Traje traje : lista) {
-//            cbTraje.addItem(new ItemCombo(traje.getIdTraje(), traje.getNombreTraje()));
-//        }
-//    }
-
+    
+    /**
+     * Carga la lista de talleres en el ComboBox.
+     */
     private void cargarTalleres() {
         cbTaller.removeAllItems();
         List<Taller> lista = tallerController.listarTaller();
 
         for (Taller taller : lista) {
-            cbTaller.addItem(new ItemCombo(taller.getIdTaller(), taller.getNombresala()));
+            String tipo = tallerController.obtenerTipoSalaPorId(taller.getIdTaller());
+
+            cbTaller.addItem(
+                new ItemCombo(
+                    taller.getIdTaller(),
+                    taller.getNombresala() + " - " + tipo
+                )
+            );
         }
     }
 
+    /**
+     * Carga los datos de una cita cuando se está en modo edición.
+     */
     private void cargarDatosCita() {
         txtFecha.setText(citaEditar.getFecha());
         txtHora.setText(citaEditar.getHora());
@@ -229,7 +276,13 @@ public class CitaFormView extends JFrame {
         seleccionarCombo(cbTraje, citaEditar.getIdTraje());
         seleccionarCombo(cbTaller, citaEditar.getIdTaller());
     }
-
+    
+    /**
+     * Selecciona un elemento en un ComboBox según su ID.
+     *
+     * @param combo ComboBox donde se realizará la selección
+     * @param idBuscado ID del elemento a seleccionar
+     */
     private void seleccionarCombo(JComboBox<ItemCombo> combo, int idBuscado) {
         for (int i = 0; i < combo.getItemCount(); i++) {
             ItemCombo item = combo.getItemAt(i);
@@ -239,7 +292,11 @@ public class CitaFormView extends JFrame {
             }
         }
     }
-
+ 
+    /**
+     * Valida los datos introducidos y guarda o actualiza la cita.
+     * También actualiza el estado del traje según el tipo de sala.
+     */
     private void guardarOActualizarCita() {
         ItemCombo cliente = (ItemCombo) cbCliente.getSelectedItem();
         ItemCombo traje = (ItemCombo) cbTraje.getSelectedItem();
@@ -309,13 +366,23 @@ public class CitaFormView extends JFrame {
         }
 
         if (resultado) {
-            JOptionPane.showMessageDialog(this, "Operación realizada correctamente.");
+            int idTallerSeleccionando = taller.getId();
+            String tipoSala = tallerController.obtenerTipoSalaPorId(idTallerSeleccionando);
+            boolean trajeActualizado = trajeController.actualizarEstadoTraje(traje.getId(), tipoSala);
+            System.out.println("UPDATE RESULT = " + trajeActualizado);
+            JOptionPane.showMessageDialog(this, "Operación realizada correctamente.\n"+ 
+        "El estado del traje se actualizó a:" + tipoSala);
             new CitasView().setVisible(true);
             dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error en la operación.");
         }
     }
+    /**
+     * Aplica estilo visual a un botón.
+     *
+     * @param button Botón a estilizar
+     * @param background Color de fondo
+     * @param foreground Color del texto
+     */
 
     private void styleButton(JButton button, Color background, Color foreground) {
         button.setFont(new Font("SansSerif", Font.BOLD, 13));
@@ -327,5 +394,6 @@ public class CitaFormView extends JFrame {
         button.setFocusPainted(false);
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
+    
 }
 

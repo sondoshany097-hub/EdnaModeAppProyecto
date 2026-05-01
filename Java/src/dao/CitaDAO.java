@@ -5,13 +5,14 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * Clase DAO para gestionar las operaciones CRUD de la tabla CITAS.
- * Se encarga de la comunicación directa con la base de datos.
+ * Clase DAO encargada de gestionar las operaciones CRUD
+ * de la tabla CITAS en la base de datos.
  */
 public class CitaDAO {
 	/**
-     * Inserta una nueva cita en la base de datos
-     */
+	 * Clase DAO encargada de gestionar las operaciones CRUD
+	 * de la tabla CITAS en la base de datos.
+	 */
 	public boolean guardarCita(Cita cita) {
 		String sql = "INSERT INTO CITAS (ID_CLIENTE, ID_TRAJE, ID_TALLER, FECHA, HORA, DURACION) VALUES (?,?,?,?,?,?)";
 		try (Connection con = ConexionBD.conectar(); PreparedStatement ps = con.prepareStatement(sql)) {
@@ -21,7 +22,7 @@ public class CitaDAO {
 			ps.setString(4, cita.getFecha());
 			ps.setString(5, cita.getHora());
 			ps.setInt(6, cita.getDuracion());
-			/**
+			/*
 			 * Ejecuta la operación (INSERT/UPDATE/DELETE) y devuelve el número de filas
 			 * afectadas. Si es mayor que 0, significa que la operación se realizó
 			 * correctamente.
@@ -29,7 +30,7 @@ public class CitaDAO {
 			int filas = ps.executeUpdate();
 			return filas > 0;
 		}
-		/**
+		/*
 		 * Cuando hay error me sale esta mensaje
 		 */
 		catch (SQLException e) {
@@ -38,7 +39,9 @@ public class CitaDAO {
 		}
 	}
 	/**
-     * Devuelve todas las citas
+     * Obtiene todas las citas registradas en la base de datos.
+     *
+     * @return lista de objetos Cita
      */
 	public List<Cita> listarCitas() {
 		List<Cita> lista = new ArrayList<>();
@@ -69,7 +72,10 @@ public class CitaDAO {
 	}
 
 	/**
-     * Actualiza una cita existente
+     * Actualiza una cita existente en la base de datos.
+     *
+     * @param cita objeto Cita con los datos actualizados
+     * @return true si la actualización fue correcta, false en caso contrario
      */
 	public boolean actualizarCliente(Cita cita) {
 		String sql = "UPDATE CITAS SET ID_CLIENTE = ?, ID_TRAJE = ?, ID_TALLER = ?, FECHA = ?, HORA = ?, DURACION = ? WHERE ID_CITA = ?";
@@ -94,7 +100,10 @@ public class CitaDAO {
 		}
 
 	/**
-     * Elimina una cita por su ID
+     * Actualiza una cita existente en la base de datos.
+     *
+     * @param cita objeto Cita con los datos actualizados
+     * @return true si la actualización fue correcta, false en caso contrario
      */
 	public boolean eliminarCitas(int idCita) {
 		String sql = "DELETE FROM CITAS WHERE ID_CITA = ?";
@@ -109,17 +118,10 @@ public class CitaDAO {
 	}
 
 	/**
-	 * Esta consulta obtiene todas las citas desde la tabla CITAS y las relaciona
-	 * con las tablas CLIENTES, TRAJES y TALLERES mediante INNER JOIN
-	 * 
-	 * El objetivo es mostrar los nombres del cliente, traje y taller en lugar de
-	 * los IDs
-	 * 
-	 * lo que hace que los datos sean más claros y fáciles de mostrar en la interfaz
-	 * (JTable) Finalmente, los resultados se ordenan por el ID de la cita
-	 * 
-	 * @return
-	 */
+     * Obtiene todas las citas con los nombres relacionados (cliente, traje y taller).
+     *
+     * @return lista de arrays con datos de citas formateados para la vista
+     */
 
 	public List<String[]> listarCitasConNombres() {
 		List<String[]> lista = new ArrayList<>();
@@ -150,4 +152,5 @@ public class CitaDAO {
 
 		return lista;
 	}
+
 }
