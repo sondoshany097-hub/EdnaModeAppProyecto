@@ -46,7 +46,7 @@ public class MainView extends JFrame {
         JLabel lblTitle = new JLabel("Main Menu");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 30));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(270, 40, 200, 40);
+        lblTitle.setBounds(264, 61, 164, 40);
         getContentPane().add(lblTitle);
 
         JButton btnClientes = new JButton("Clientes");
@@ -61,11 +61,11 @@ public class MainView extends JFrame {
         styleButton(btnTalleres, darkGreen, Color.WHITE);
         styleButton(btnLogout, darkRed, Color.WHITE);
 
-        btnClientes.setBounds(230, 120, 220, 45);
+        btnClientes.setBounds(230, 242, 220, 45);
         btnTrajes.setBounds(230, 185, 220, 45);
-        btnCitas.setBounds(230, 250, 220, 45);
-        btnTalleres.setBounds(230, 315, 220, 45);
-        btnLogout.setBounds(230, 380, 220, 45);
+        btnCitas.setBounds(230, 128, 220, 45);
+        btnTalleres.setBounds(230, 300, 220, 45);
+        btnLogout.setBounds(230, 357, 220, 45);
 
         getContentPane().add(btnClientes);
         getContentPane().add(btnTrajes);
