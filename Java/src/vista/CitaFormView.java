@@ -215,22 +215,20 @@ public class CitaFormView extends JFrame {
  
     /**
      * Recarga los ComboBox manteniendo las selecciones actuales.
+     * @param trajeId 
      */
-    public void recargarCombos() {
-        ItemCombo clienteSeleccionado = (ItemCombo) cbCliente.getSelectedItem();
-        ItemCombo trajeSeleccionado = (ItemCombo) cbTraje.getSelectedItem();
-        ItemCombo tallerSeleccionado = (ItemCombo) cbTaller.getSelectedItem();
-
-        Integer idCliente = clienteSeleccionado != null ? clienteSeleccionado.getId() : null;
-        Integer idTraje = trajeSeleccionado != null ? trajeSeleccionado.getId() : null;
-        Integer idTaller = tallerSeleccionado != null ? tallerSeleccionado.getId() : null;
-
+    public void recargarCombos(Integer clienteId, Integer trajeId) {
         cargarClientes();
         cargarTalleres();
 
-        if (idCliente != null) seleccionarCombo(cbCliente, idCliente);
-        if (idTraje != null) seleccionarCombo(cbTraje, idTraje);
-        if (idTaller != null) seleccionarCombo(cbTaller, idTaller);
+        if (clienteId != null) {
+            seleccionarCombo(cbCliente, clienteId);
+            filtrarTrajesPorCliente();  
+        }
+
+        if (trajeId != null) {
+            seleccionarCombo(cbTraje, trajeId);
+        }
     }
 
     /**

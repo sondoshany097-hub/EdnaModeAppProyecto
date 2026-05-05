@@ -46,7 +46,6 @@ public class ClienteDAO {
     /**
      * Inserta un nuevo cliente en la base de datos.
      *
-     * @param cliente objeto Cliente con los datos a guardar
      * @return ID generado del cliente insertado, o -1 si ocurre un error
      */
     public List<Cliente> listarClientes() {

@@ -234,7 +234,14 @@ public class ClienteFormView extends JFrame {
             trajeController.actiualizarTraje(traje);
         }
         JOptionPane.showMessageDialog(this, "Guardado correctamente.");
-        volverPantallaAnterior();
+        volverPantallaAnterior(clienteId);
+        if (citaFormPadre != null) {
+            citaFormPadre.recargarCombos(clienteId, null);
+            citaFormPadre.setVisible(true);
+        } else {
+            new ClientesView().setVisible(true);
+        }
+        dispose();
     }
 
     /**
@@ -242,9 +249,18 @@ public class ClienteFormView extends JFrame {
      * Si el formulario fue abierto desde la vista de citas, recarga los datos
      * en dicha vista. En caso contrario, vuelve a la lista de clientes.
     */
+    private void volverPantallaAnterior(int clienteId) {
+        if (citaFormPadre != null) {
+            citaFormPadre.recargarCombos(clienteId, null); 
+            citaFormPadre.setVisible(true);
+        } else {
+            new ClientesView().setVisible(true);
+        }
+        dispose();
+    }
     private void volverPantallaAnterior() {
         if (citaFormPadre != null) {
-            citaFormPadre.recargarCombos();
+            citaFormPadre.recargarCombos(null, null); 
             citaFormPadre.setVisible(true);
         } else {
             new ClientesView().setVisible(true);

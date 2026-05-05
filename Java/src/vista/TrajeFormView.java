@@ -227,13 +227,14 @@ public class TrajeFormView extends JFrame {
         }
     }
 
+    
     /**
      * Vuelve a la pantalla anterior.
      * Si fue abierto desde citas, recarga los combos en esa vista.
     */
     private void volverPantallaAnterior() {
         if (citaFormPadre != null) {
-            citaFormPadre.recargarCombos();
+            citaFormPadre.recargarCombos(null, null);
             citaFormPadre.setVisible(true);
         } else {
             new TrajesView().setVisible(true);
