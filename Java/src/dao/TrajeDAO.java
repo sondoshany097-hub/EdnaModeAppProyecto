@@ -38,7 +38,7 @@ public class TrajeDAO {
     /**
      * Inserta un nuevo traje en la base de datos.
      *
-     * @param traje objeto Traje con los datos a guardar
+     * traje objeto Traje con los datos a guardar
      * @return true si el traje fue insertado correctamente, false en caso contrario
      */
     
@@ -173,9 +173,6 @@ public class TrajeDAO {
     /**
      * Actualiza únicamente el estado de un traje.
      *
-     * @param idTraje identificador del traje
-     * @param estado nuevo estado a asignar
-     * @return true si se actualizó correctamente, false en caso contrario
      */
     public List<Traje> obtenerTrajesPorCliente(int idCliente) {
         List<Traje> lista = new ArrayList<>();

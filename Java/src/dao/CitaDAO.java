@@ -102,7 +102,7 @@ public class CitaDAO {
 	/**
      * Actualiza una cita existente en la base de datos.
      *
-     * @param cita objeto Cita con los datos actualizados
+     *  cita objeto Cita con los datos actualizados
      * @return true si la actualización fue correcta, false en caso contrario
      */
 	public boolean eliminarCitas(int idCita) {
