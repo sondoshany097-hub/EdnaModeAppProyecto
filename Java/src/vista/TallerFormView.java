@@ -44,7 +44,7 @@ public class TallerFormView extends JFrame {
         this.tallerController = new TallerController();
 
         setTitle("Edna Moda - Formulario de Taller");
-        setSize(620, 500);
+        setSize(520, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -76,27 +76,27 @@ public class TallerFormView extends JFrame {
         JLabel lblTitle = new JLabel("Formulario de Taller");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(160, 30, 320, 35);
+        lblTitle.setBounds(122, 33, 284, 35);
         getContentPane().add(lblTitle);
 
         JLabel lblNombreSala = new JLabel("Nombre sala:");
         lblNombreSala.setFont(new Font("SansSerif", Font.BOLD, 16));
         lblNombreSala.setForeground(textColor);
-        lblNombreSala.setBounds(70, 160, 140, 25);
+        lblNombreSala.setBounds(70, 120, 118, 25);
         getContentPane().add(lblNombreSala);
 
         txtNombreSala = new JTextField();
-        txtNombreSala.setBounds(230, 160, 250, 32);
+        txtNombreSala.setBounds(215, 117, 250, 32);
         getContentPane().add(txtNombreSala);
 
         JLabel lblTipoSala = new JLabel("Tipo sala:");
         lblTipoSala.setFont(new Font("SansSerif", Font.BOLD, 16));
         lblTipoSala.setForeground(textColor);
-        lblTipoSala.setBounds(70, 220, 140, 25);
+        lblTipoSala.setBounds(80, 181, 108, 25);
         getContentPane().add(lblTipoSala);
 
         cbTipoSala = new JComboBox<>(new String[]{"Diseño", "Costura", "Pruebas"});
-        cbTipoSala.setBounds(230, 220, 250, 32);
+        cbTipoSala.setBounds(215, 179, 250, 32);
         getContentPane().add(cbTipoSala);
 
         JButton btnGuardar = new JButton("Guardar");
@@ -106,8 +106,8 @@ public class TallerFormView extends JFrame {
         styleButton(btnCancelar, darkGreen, Color.WHITE);
         btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
-        btnGuardar.setBounds(150, 350, 130, 42);
-        btnCancelar.setBounds(320, 350, 130, 42);
+        btnGuardar.setBounds(99, 261, 130, 42);
+        btnCancelar.setBounds(276, 261, 130, 42);
 
         getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);

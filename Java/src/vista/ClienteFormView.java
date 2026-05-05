@@ -109,15 +109,15 @@ public class ClienteFormView extends JFrame {
         JLabel lblTitle = new JLabel("Formulario de Cliente");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(170, 29, 320, 35);
+        lblTitle.setBounds(212, 30, 271, 35);
         getContentPane().add(lblTitle);
 
         JLabel lblNombre = new JLabel("Nombre de Cliente:");
         JLabel lblSuperpoder = new JLabel("Superpoder:");
         JLabel lblColores = new JLabel("Colores:");
         JLabel lblTipo = new JLabel("Tipo:");
-        JLabel lblNombreTrajes = new JLabel("Nombre de Trajes:");
-        JLabel lblEstado = new JLabel("Estado de Trajes:");
+        JLabel lblNombreTrajes = new JLabel("Nombre de Traje:");
+        JLabel lblEstado = new JLabel("Estado de Traje:");
 
         JLabel[] labels = {lblNombre, lblSuperpoder, lblColores, lblTipo, lblEstado,lblNombreTrajes };
 
@@ -161,8 +161,8 @@ public class ClienteFormView extends JFrame {
         styleButton(btnCancelar, darkGreen, Color.WHITE);
         btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 
-        btnGuardar.setBounds(170, 489, 130, 42);
-        btnCancelar.setBounds(339, 489, 130, 42);
+        btnGuardar.setBounds(200, 489, 130, 42);
+        btnCancelar.setBounds(381, 489, 130, 42);
 
         getContentPane().add(btnGuardar);
         getContentPane().add(btnCancelar);
