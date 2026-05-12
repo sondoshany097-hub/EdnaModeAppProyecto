@@ -55,7 +55,7 @@ public class TrajesView extends JFrame {
         JLabel lblTitle = new JLabel("Gestión de Trajes");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(30, 20, 320, 35);
+        lblTitle.setBounds(401, 53, 240, 35);
         getContentPane().add(lblTitle);
 
         String[] columns = {"ID", "Cliente", "Nombre de Traje ", "Estado de Traje"};

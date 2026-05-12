@@ -69,7 +69,7 @@ public class TalleresView extends JFrame {
         JLabel lblTitle = new JLabel("Gestión de Talleres");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(30, 20, 320, 35);
+        lblTitle.setBounds(321, 53, 249, 35);
         getContentPane().add(lblTitle);
 
         String[] columns = {"Nombre Sala", "Tipo Sala"};

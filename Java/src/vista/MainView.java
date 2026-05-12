@@ -43,10 +43,10 @@ public class MainView extends JFrame {
         Color gold = new Color(201, 169, 97);
         Color darkRed = new Color(140, 40, 40);
 
-        JLabel lblTitle = new JLabel("Main Menu");
+        JLabel lblTitle = new JLabel("Menu Principal");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 30));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(264, 61, 164, 40);
+        lblTitle.setBounds(242, 64, 235, 40);
         getContentPane().add(lblTitle);
 
         JButton btnClientes = new JButton("Clientes");

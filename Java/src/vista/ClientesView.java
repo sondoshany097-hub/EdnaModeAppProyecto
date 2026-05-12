@@ -73,7 +73,7 @@ public class ClientesView extends JFrame {
         JLabel lblTitle = new JLabel("Gestión de Clientes");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 28));
         lblTitle.setForeground(darkGreen);
-        lblTitle.setBounds(30, 20, 320, 35);
+        lblTitle.setBounds(350, 33, 249, 35);
         getContentPane().add(lblTitle);
 
         JLabel lblBuscar = new JLabel("Buscar:");
